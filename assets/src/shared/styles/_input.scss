@@ -1,0 +1,339 @@
+/* stylelint-disable selector-class-pattern */
+
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+
+@mixin ppla-text-control {
+
+	// --- Główne style kontrolki tekstowej ---
+	.components-text-control__input,
+	.components-textarea-control__input,
+	.components-input-control__input {
+
+		@include helpers.ppla-scope {
+
+			@include helpers.ppla-text-control-base;
+		}
+	}
+
+	.components-base-control__label,
+	.components-input-control__label,
+	.components-form-token-field__label,
+	.components-menu-group__label,
+	.ppla-select-control__label {
+
+		@include helpers.ppla-scope {
+
+			@include helpers.ppla-input-label-base;
+		}
+	}
+}
+
+@mixin ppla-admin-form-rhythm {
+
+	.ppla-text-control > legend.components-base-control__label {
+
+		@include helpers.ppla-scope {
+			margin-block-end: $grid-unit-05;
+		}
+	}
+
+
+	.components-text-control,
+	.components-textarea-control,
+	.components-input-control,
+	.ppla-select-control {
+
+		@include helpers.ppla-scope {
+			margin: 0;
+		}
+	}
+
+	.components-text-control .components-base-control__field,
+	.components-base-control__field:has(> .components-text-control__input),
+	.components-textarea-control .components-base-control__field,
+	.components-input-control .components-base-control__field {
+
+		@include helpers.ppla-scope {
+			display: flex;
+			flex-direction: column;
+			gap: $grid-unit-05;
+			margin: 0;
+		}
+	}
+
+	.components-form-token-field {
+
+		@include helpers.ppla-scope {
+			display: flex;
+			flex-direction: column;
+			gap: $grid-unit-05;
+			margin: 0;
+			position: relative;
+		}
+	}
+
+	.components-form-token-field__input-container {
+
+		@include helpers.ppla-scope {
+			box-sizing: border-box;
+			min-height: 42px;
+			height: auto;
+			width: 100%;
+			padding: $grid-unit-05 $grid-unit-10;
+			border: 1px solid var(--ppla-control-border, #e0e0e0);
+			border-radius: $radius-medium;
+			background: $white;
+			box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+			transition: border-color 180ms ease, box-shadow 180ms ease;
+
+			&:focus-within {
+				border-color: var(--ppla-color-primary, #10b981);
+				box-shadow: var(--ppla-control-focus, 0 0 0 3px rgba(16, 185, 129, 0.16));
+			}
+		}
+	}
+
+	.components-form-token-field__input-container > .components-flex {
+
+		@include helpers.ppla-scope {
+			min-height: 24px;
+			padding: 0;
+		}
+	}
+
+	.components-form-token-field__input {
+
+		@include helpers.ppla-scope {
+			min-height: 24px;
+			padding: 0;
+			border: 0;
+			border-radius: 0;
+			background: transparent;
+			box-shadow: none;
+			font-size: 13px;
+
+			&:focus {
+				border: 0;
+				box-shadow: none;
+				outline: none;
+			}
+		}
+	}
+
+	.components-base-control__help,
+	.components-input-control__help {
+
+		@include helpers.ppla-scope {
+			margin: $grid-unit-05 0 0;
+			color: $ppla-text-muted;
+			font-size: $font-size-small;
+			line-height: 1.45;
+		}
+	}
+
+	.ppla-select-control__help,
+	.components-form-token-field__help {
+
+		@include helpers.ppla-scope {
+			margin: 0;
+			color: $ppla-text-muted;
+			font-size: $font-size-small;
+			line-height: 1.45;
+		}
+	}
+}
+	
+@mixin ppla-textarea-control {
+
+	.components-textarea-control__input {
+
+		@include helpers.ppla-scope {
+			resize: none;
+		}
+	}
+}
+
+@mixin ppla-help {
+
+	.ppla-help {
+		
+		@include helpers.ppla-scope {
+			margin: 0;
+			
+			display: flex;
+			align-items: center;
+			color: $ppla-text-muted;
+			
+			@include body-small;
+			
+			margin-block-start: $grid-unit-05;
+			margin-inline-start: 0;
+			
+			&.is-error {
+				color: $alert-red;
+			}
+			
+			&:has(+ &) {
+				margin-bottom: $grid-unit-05;
+			}
+
+			&.has-icon {
+
+				&::before {
+					content: "\f534";
+					margin-right: $grid-unit-05;
+					-webkit-font-smoothing: antialiased;
+					vertical-align: middle;
+					
+					@include body-large;
+					
+					line-height: 1;
+					/* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+					font-family: dashicons;
+				}
+			}
+
+			&.is-badge {
+				padding: $grid-unit-05 $grid-unit-15;
+				border-radius: $radius-medium;
+				margin-block-start: $grid-unit-10;
+				
+				width: fit-content;
+
+				@include helpers.ppla-badge-theme($gray-700)
+			}
+		}
+	}
+}
+
+
+@mixin ppla-is-required {
+
+	// --- Modyfikatory Stanu: Wymagane ---
+	.is-required {
+		
+		@include helpers.ppla-scope {
+			
+			.components-base-control__label::after,
+			.components-form-token-field__label::after,
+			.components-input-control__label::after  {
+				content: "*";
+				color: $alert-red;
+				margin-left: $grid-unit-05;
+				font-weight: $font-weight-medium;
+			}
+		}
+	}
+}
+
+@mixin ppla-has-error {
+
+	.has-error {
+		
+		@include helpers.ppla-scope {
+			
+			.components-text-control__input {
+				border-color: $alert-red;
+			}
+			
+			.components-base-control__help,
+			.components-base-control__error {
+				margin: 0;
+				
+				display: flex;
+				align-items: center;
+				color: $alert-red;
+				
+				@include body-small;
+				
+				margin-block-start: $grid-unit-05;
+				margin-inline-start: 0;
+				
+				&::before {
+					content: "\f534";
+					margin-right: $grid-unit-05;
+					-webkit-font-smoothing: antialiased;
+					vertical-align: middle;
+					
+					@include body-large;
+					
+					line-height: 1;
+					/* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+					font-family: dashicons;
+				}
+			}
+		}
+	}
+}
+
+@mixin ppla-select-control {
+
+	.ppla-select-control {
+
+		@include helpers.ppla-scope {
+
+			.ppla-select-control__label {
+
+				@include helpers.ppla-input-label-base;
+			}
+
+			&.ppla-select-control--label-side .ppla-select-control__label {
+				white-space: nowrap;
+			}
+
+			.ppla-select-control__trigger {
+				width: 100%;
+				min-height: 42px;
+				height: 42px;
+				border-color: #e0e0e0;
+				border-radius: $radius-medium;
+				background: $white;
+				font-size: 13px;
+
+				[role="combobox"] {
+					min-height: 40px;
+				}
+
+				&:focus-within {
+					border-color: var(--ppla-color-primary, #10b981);
+					box-shadow: var(--ppla-control-focus, 0 0 0 3px rgba(16, 185, 129, 0.16));
+					outline: 2px solid #0f9f6e;
+					outline-offset: 1px;
+				}
+
+				&:has([data-can-disable-input-layout][data-disabled]) {
+					background: #f6f7f7;
+				}
+			}
+
+		}
+	}
+}
+
+/* WPDS renders the popup in a portal outside the admin root. */
+.ppla-select-control__portal {
+	--wp-ui-select-z-index: 1000001;
+}
+
+.ppla-select-control__popup {
+	border-color: #e0e0e0;
+	border-radius: $radius-medium;
+	background: $white;
+	color: $gray-900;
+	font-size: 13px;
+}
+
+.ppla-select-control__option {
+
+	&[data-selected] {
+		background: #ecfdf5;
+		color: #0f9f6e;
+	}
+
+	&[data-highlighted]:not([aria-disabled="true"]) {
+		background: #ecfdf5;
+		color: $gray-900;
+	}
+}

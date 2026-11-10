@@ -1,0 +1,6 @@
+/**
+ * Styles for the Advanced Toggle component.
+ */
+
+@use "shared/styles" as shared;
+@include shared.ppla-toggle-base;

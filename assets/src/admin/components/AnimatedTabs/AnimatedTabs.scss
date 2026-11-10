@@ -1,0 +1,175 @@
+/* stylelint-disable no-descending-specificity */
+@use "styles/variables" as *;
+
+.ppla-animated-tabs {
+	position: relative;
+	margin-bottom: 0;
+	border-bottom: 1px solid $gray-200;
+	z-index: 2;
+
+	container: ppla-tabs / inline-size;
+
+	&__list {
+		display: grid;
+		grid-auto-flow: column;
+		grid-auto-columns: max-content;
+		width: fit-content;
+		max-width: 100%;
+		position: relative;
+		padding: 1px;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		@include max-medium {
+			grid-auto-columns: minmax(42px, 1fr);
+			width: 100%;
+		}
+	}
+
+	&__button {
+		border: none;
+		box-shadow: none;
+		border-radius: 0;
+		color: $gray-700;
+		padding-block: $grid-unit-10;
+		padding-inline: $grid-unit-15 $grid-unit-20;
+		position: relative;
+		z-index: 2;
+		height: 48px;
+		width: 100%;
+
+		@include heading-medium;
+
+		will-change: color, background-color;
+		transition:
+			color 0.2s ease-in-out,
+			background-color 0.2s ease-in-out;
+
+		&.is-active {
+			z-index: 3;
+			color: $gray-800;
+			transition-delay: 0.15s;
+			font-weight: $font-weight-bold;
+		}
+
+		&:hover:not(:disabled, [aria-disabled="true"]) {
+			color: $gray-900;
+		}
+
+		&:focus-visible {
+			outline: 2px solid
+				var(--wp-admin-theme-color, var(--ppla-color-primary));
+			outline-offset: -2px;
+		}
+
+		white-space: nowrap;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: $grid-unit-05;
+
+		&-text {
+			display: block;
+
+			@include max-medium {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				padding: 0;
+				margin: -1px;
+				overflow: hidden;
+				clip: rect(0, 0, 0, 0);
+				white-space: nowrap;
+				clip-path: inset(50%);
+				border: 0;
+			}
+		}
+
+		svg {
+			min-width: $icon-size;
+			height: $icon-size;
+
+			@include max-medium {
+				min-width: $icon-size * 1.5;
+				height: $icon-size * 1.5;
+			}
+		}
+
+		@include max-medium {
+			height: 42px;
+			width: 42px;
+			padding-inline: $grid-unit-20;
+			margin-inline: auto;
+		}
+	}
+
+	// Narrow content areas (e.g. 1024px screens with the admin menu) keep the
+	// tab names and drop the icons, so every tab stays visible.
+	@container ppla-tabs (max-width: 940px) {
+
+		@media (min-width: #{ ($break-medium + 1) }) {
+
+			&__button {
+				padding-inline: $grid-unit-15;
+
+				svg {
+					display: none;
+				}
+			}
+		}
+	}
+
+	&__line {
+		pointer-events: none;
+		position: absolute;
+		z-index: 4;
+		bottom: 0;
+		left: 0;
+		height: 3px;
+		background-color: var(--ppla-color-primary);
+		will-change: transform, width, opacity;
+		transition:
+			transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 0.2s ease,
+			scale 0.2s ease;
+		opacity: 0;
+		transform: scaleY(0);
+
+		&.is-ready {
+			left: var(--ppla-tab-left);
+			width: var(--ppla-tab-width);
+
+			animation: ppla-animated-tabs-line 0.2s ease-in-out forwards;
+			animation-delay: 0.2s;
+
+			@keyframes ppla-animated-tabs-line {
+
+				from {
+					opacity: 0;
+					transform: scaleY(0);
+				}
+
+				to {
+					opacity: 1;
+					transform: scaleY(1);
+				}
+			}
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+
+		&__button,
+		&__line {
+			transition: none;
+			animation: none;
+		}
+	}
+}

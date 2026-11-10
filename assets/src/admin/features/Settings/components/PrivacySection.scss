@@ -1,0 +1,309 @@
+/* stylelint-disable selector-class-pattern, no-descending-specificity */
+@use "styles/variables" as *;
+
+.ppla-privacy-mode {
+	padding-block-end: $grid-unit-30;
+	border-block-end: $border-width solid $gray-200;
+
+	&__heading {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: $grid-unit-15;
+
+		h3 {
+			margin: $grid-unit-05 0 0;
+			color: $gray-900;
+			font-size: $ppla-font-size-medium;
+		}
+	}
+
+	&__eyebrow {
+		color: var(--ppla-theme-color-primary-text);
+		font-size: $ppla-font-size-small;
+		font-weight: $font-weight-bold;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	&__pending,
+	&__recommended {
+		padding: $grid-unit-05 $grid-unit-10;
+		border-radius: $radius-full;
+		font-size: $ppla-font-size-small;
+		font-weight: $font-weight-bold;
+		white-space: nowrap;
+	}
+
+	&__pending {
+		border: $border-width solid var(--ppla-color-primary);
+		color: var(--ppla-color-primary-dark);
+	}
+
+	&__options {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: $grid-unit-15;
+		margin-block-start: $grid-unit-20;
+	}
+
+	&__option {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: $grid-unit-10;
+		min-height: 120px;
+		padding: $grid-unit-20;
+		border: $border-width solid $gray-300;
+		border-radius: $radius-medium;
+		background: $white;
+		color: $gray-700;
+		font-size: $ppla-font-size-small;
+		line-height: 1.45;
+		text-align: start;
+		cursor: pointer;
+		transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+
+		&:hover {
+			border-color: var(--ppla-color-primary);
+			background: color-mix(in srgb, var(--ppla-color-primary) 3%, $white);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--ppla-color-primary);
+			outline-offset: 2px;
+		}
+
+		&.is-selected {
+			border-color: var(--ppla-color-primary);
+			background: color-mix(in srgb, var(--ppla-color-primary) 7%, $white);
+			box-shadow: inset 3px 0 0 var(--ppla-color-primary);
+			color: $gray-800;
+		}
+
+		&:disabled {
+			cursor: wait;
+			opacity: 0.65;
+		}
+	}
+
+	&__option-title {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: $grid-unit-10;
+		color: $gray-900;
+		font-size: $ppla-font-size-medium;
+		font-weight: $font-weight-bold;
+	}
+
+	&__recommended {
+		background: color-mix(in srgb, var(--ppla-color-primary) 12%, $white);
+		color: var(--ppla-color-primary-dark);
+	}
+}
+
+.ppla-privacy-summary {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	margin-block-start: $grid-unit-30;
+	border-block: $border-width solid $gray-200;
+
+	> div {
+		display: flex;
+		flex-direction: column;
+		gap: $grid-unit-05;
+		min-width: 0;
+		padding: $grid-unit-15;
+		border-inline-end: $border-width solid $gray-200;
+
+		&:last-child {
+			border-inline-end: 0;
+		}
+	}
+
+	span {
+		color: $ppla-text-muted;
+		font-size: $ppla-font-size-small;
+	}
+
+	strong {
+		color: $gray-900;
+		font-size: $ppla-font-size-small;
+		line-height: 1.4;
+	}
+}
+
+.ppla-privacy-meta {
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: $grid-unit-10;
+	padding-block: $grid-unit-15;
+	color: $ppla-text-muted;
+	font-size: $ppla-font-size-small;
+
+	strong {
+		color: $gray-800;
+		font-weight: $font-weight-medium;
+	}
+
+	> span:last-child {
+		margin-inline-start: auto;
+	}
+}
+
+.ppla-privacy-note {
+	margin: 0;
+	padding: $grid-unit-10 $grid-unit-15;
+	border-inline-start: 3px solid var(--ppla-color-primary);
+	background: color-mix(in srgb, var(--ppla-color-primary) 5%, $white);
+	color: $gray-700;
+	font-size: $ppla-font-size-small;
+	line-height: 1.45;
+}
+
+.ppla-privacy-history {
+	margin-block-start: $grid-unit-10;
+	border-block-start: $border-width solid $gray-200;
+
+	summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: $grid-unit-15;
+		padding-block: $grid-unit-15;
+		color: $gray-800;
+		cursor: pointer;
+		list-style: none;
+
+		&::-webkit-details-marker {
+			display: none;
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--ppla-color-primary);
+			outline-offset: 2px;
+		}
+
+		> span {
+			display: flex;
+			flex-direction: column;
+			gap: $grid-unit-05;
+		}
+
+		strong {
+			font-size: $ppla-font-size-small;
+		}
+
+		small,
+		em {
+			color: $ppla-text-muted;
+			font-size: $ppla-font-size-small;
+			font-style: normal;
+		}
+	}
+
+	&[open] summary {
+		border-block-end: $border-width solid $gray-200;
+	}
+
+	ol {
+		display: grid;
+		gap: $grid-unit-10;
+		margin: 0;
+		padding: $grid-unit-15 0 0;
+		list-style: none;
+	}
+
+	li {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: $grid-unit-05 $grid-unit-15;
+		padding: $grid-unit-10 $grid-unit-15;
+		border-inline-start: 3px solid var(--ppla-color-primary);
+		background: $gray-100;
+
+		strong {
+			color: $gray-900;
+			font-size: $ppla-font-size-small;
+		}
+
+		time {
+			color: $ppla-text-muted;
+			font-size: $ppla-font-size-small;
+			white-space: nowrap;
+		}
+
+		p {
+			grid-column: 1 / -1;
+			margin: 0;
+			color: $ppla-text-muted;
+			font-size: $ppla-font-size-small;
+			line-height: 1.4;
+		}
+	}
+
+	&__empty {
+		margin: 0;
+		padding-block: $grid-unit-15;
+		color: $ppla-text-muted;
+		font-size: $ppla-font-size-small;
+		line-height: 1.45;
+	}
+}
+
+.ppla-privacy-impact-preview {
+	color: $gray-700;
+
+	strong {
+		color: $gray-900;
+	}
+
+	li,
+	p {
+		line-height: 1.5;
+	}
+}
+
+@media (max-width: 782px) {
+
+	.ppla-privacy-mode__options,
+	.ppla-privacy-summary {
+		grid-template-columns: 1fr;
+	}
+
+	.ppla-privacy-summary > div {
+		border-inline-end: 0;
+		border-block-end: $border-width solid $gray-200;
+
+		&:last-child {
+			border-block-end: 0;
+		}
+	}
+
+	.ppla-privacy-meta > span:last-child {
+		width: 100%;
+		margin-inline-start: 0;
+	}
+
+	.ppla-privacy-history summary {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.ppla-privacy-history li {
+		grid-template-columns: 1fr;
+
+		time {
+			white-space: normal;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	.ppla-privacy-mode__option {
+		transition: none;
+	}
+}

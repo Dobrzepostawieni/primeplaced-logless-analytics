@@ -1,0 +1,15 @@
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+
+.ppla-datatable__footer-bulkactions {
+	position: relative;
+	z-index: 3;
+	display: flex;
+	gap: $grid-unit-20;
+	align-items: center;
+	justify-content: flex-start;
+
+	@include max-medium {
+		margin-right: auto;
+	}
+}

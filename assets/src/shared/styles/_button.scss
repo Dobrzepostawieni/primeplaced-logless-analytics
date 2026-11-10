@@ -1,0 +1,250 @@
+/**
+ * Button mixins for PrimePlaced - Logless Analytics.
+ * Contains only definitions, no direct CSS output.
+ *
+ * @package primeplaced-logless-analytics
+ */
+
+@use "sass:color";
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+// ==========================================
+// 1. BASE BUTTON MIXIN
+// ==========================================
+@mixin ppla-button-base {
+
+    .ppla-button {
+
+        @include helpers.ppla-scope {
+            --ppla-btn-bg: transparent;
+            --ppla-btn-border: transparent;
+            --ppla-btn-color: inherit;
+            --ppla-btn-shadow: none;
+            --ppla-btn-transform: none;
+
+            --ppla-btn-hover-bg: var(--ppla-btn-bg);
+            --ppla-btn-hover-border: var(--ppla-btn-border);
+            --ppla-btn-hover-color: var(--ppla-btn-color);
+            --ppla-btn-hover-shadow: none;
+            --ppla-btn-hover-transform: none;
+
+            --ppla-btn-padding: #{$grid-unit-10} #{$grid-unit-15};
+
+            gap: $grid-unit-10;
+            font-size: $ppla-font-size-medium;
+            font-weight: $font-weight-medium;
+            border-radius: $radius-medium;
+            outline: none;
+            transition: 
+                background-color 0.2s ease-in-out, 
+                color 0.2s ease-in-out,
+                border-color 0.2s ease-in-out, 
+                box-shadow 0.2s ease-in-out, 
+                transform 0.2s ease-in-out,
+				opacity 0.2s ease-in-out;
+
+			width: fit-content;
+            
+            padding: var(--ppla-btn-padding);
+            background: var(--ppla-btn-bg);
+            border: 1px solid var(--ppla-btn-border);
+            color: var(--ppla-btn-color);
+            box-shadow: var(--ppla-btn-shadow);
+            transform: var(--ppla-btn-transform);
+
+			height: 40px;
+
+            &:disabled, 
+            &[aria-disabled="true"] {
+                opacity: 0.5;
+                box-shadow: none;
+            }
+
+            &:focus:not(:disabled) {
+                box-shadow: 
+                    inset 0 0 0 1px var(--wp-components-color-background, #fff), 
+                    0 0 0 var(--wp-admin-border-width-focus) var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+            }
+
+			@media (hover: hover) {
+
+				&:hover:not(:disabled, [aria-disabled="true"], .is-pressed) {
+					background: var(--ppla-btn-hover-bg);
+					border-color: var(--ppla-btn-hover-border);
+					color: var(--ppla-btn-hover-color);
+					box-shadow: var(--ppla-btn-hover-shadow);
+					transform: var(--ppla-btn-hover-transform);
+				}
+			}
+
+			@include max-medium {
+				height: 42px;
+			}
+
+            @content;
+        }
+    }
+}
+
+// ==========================================
+// 2. ICON MODIFIERS MIXIN
+// ==========================================
+@mixin ppla-button-icon-modifiers {
+
+    &.has-icon {
+
+        &.has-text {
+            --ppla-btn-padding: #{$grid-unit-10} #{$grid-unit-15};
+        }
+
+        &:not(.has-text) {
+            --ppla-btn-padding: #{$grid-unit-10};
+			width: 40px;
+
+			@include max-large {
+				width: 42px;
+				min-width: 42px;
+
+				svg {
+					width: $icon-size * 1.5;
+            		height: $icon-size * 1.5;
+				}
+			}
+        }
+
+        &.is-small:not(.has-text) {
+            width: $icon-size * 1.2;
+            height: $icon-size * 1.2;
+
+			@include max-large {
+				width: $icon-size * 1.5;
+            	height: $icon-size * 1.5;
+				min-width: $icon-size * 1.5;
+			}
+        }
+    }
+
+    &:not(.is-compact) {
+
+        svg {
+            margin-inline: calc(#{$grid-unit-10} * -1);
+        }
+    }
+}
+
+// ==========================================
+// 3. VISUAL VARIANTS MIXINS
+// ==========================================
+
+@mixin ppla-button-variant-link {
+
+    &.is-link {
+		text-decoration: none;
+        --ppla-btn-hover-bg: var(--ppla-theme-gradient);
+        --ppla-btn-hover-border: var(--ppla-theme-color-primary);
+        --ppla-btn-hover-color: #{$white};
+
+		&.is-destructive {
+			--ppla-btn-hover-bg: #{$alert-red};
+            --ppla-btn-hover-border: #{$alert-red};
+		}
+    }
+}
+
+@mixin ppla-button-variant-secondary {
+
+    &.is-secondary {
+        --ppla-btn-border: var(--ppla-theme-color-primary-text);
+        --ppla-btn-color: var(--ppla-theme-color-primary-text);
+
+        // White text on the light brand gradient was only ~2.5:1; a tinted
+        // fill keeps the dark text readable on hover and while a menu is open.
+        --ppla-btn-hover-bg: rgba(var(--ppla-theme-color-primary-rgb), 0.1);
+        --ppla-btn-hover-border: var(--ppla-theme-color-primary-text);
+        --ppla-btn-hover-color: var(--ppla-theme-color-primary-text);
+
+        &[aria-expanded="true"]:not(:disabled, [aria-disabled="true"]) {
+            background: var(--ppla-btn-hover-bg);
+            color: var(--ppla-btn-hover-color);
+        }
+
+        &.is-destructive {
+            --ppla-btn-border: #{$alert-red};
+            --ppla-btn-color: #{$alert-red};
+
+            --ppla-btn-hover-bg: #{$alert-red};
+            --ppla-btn-hover-border: #{$alert-red};
+        }
+
+        &.is-pro {
+            --ppla-btn-border: var(--ppla-theme-color-primary-text);
+            --ppla-btn-color: var(--ppla-theme-color-primary-text);
+        }
+    }
+}
+
+@mixin ppla-button-variant-tertiary {
+
+    &.is-tertiary {
+        --ppla-btn-bg: #{$white};
+        --ppla-btn-border: #{$gray-300};
+        --ppla-btn-color: #{$gray-800};
+
+        --ppla-btn-hover-bg: #{$gray-100};
+        --ppla-btn-hover-border: #{$gray-700};
+        --ppla-btn-hover-color: #{$gray-800};
+
+        &.is-destructive {  
+            --ppla-btn-hover-color: #{$alert-red};
+            --ppla-btn-hover-bg: #{color.mix($white, $alert-red, 95%)};
+            --ppla-btn-hover-border: #{$alert-red};
+        }
+    }
+}
+
+@mixin ppla-button-variant-primary {
+
+    &.is-primary:not(.is-pro) {
+        --ppla-btn-bg: var(--ppla-color-primary-strong);
+        --ppla-btn-border: var(--ppla-color-primary-strong);
+        --ppla-btn-color: #{$white};
+
+		// text-shadow: 0 1px 1px #a31c2d; WCAG
+
+        &:not(:disabled, [aria-disabled="true"]) {
+            --ppla-btn-shadow: 0 2px 8px rgba(var(--ppla-color-primary-rgb), 0.25);
+        }
+
+        --ppla-btn-hover-bg: var(--ppla-color-primary-strong-hover);
+        --ppla-btn-hover-border: var(--ppla-color-primary-strong-hover);
+        --ppla-btn-hover-shadow: 0 4px 12px rgba(var(--ppla-color-primary-dark-rgb), 0.35);
+        --ppla-btn-hover-transform: translateY(-1px);
+
+        &.is-destructive {
+            --ppla-btn-border: #{$alert-red};
+            --ppla-btn-bg: #{$alert-red};
+            --ppla-btn-color: #{$white};
+
+            --ppla-btn-hover-bg: #{$alert-red};
+            --ppla-btn-hover-border: #{$alert-red};
+            --ppla-btn-hover-shadow: 0 4px 12px #{rgba($alert-red, 0.35)};
+        }
+    }
+}
+
+@mixin ppla-button-variant-pro {
+
+    &.is-pro {
+        --ppla-btn-bg: var(--ppla-theme-gradient);
+        --ppla-btn-border: var(--ppla-theme-color-primary);
+        --ppla-btn-color: #{$white};
+
+        &:not(:disabled, [aria-disabled="true"]) {
+            --ppla-btn-shadow: 0 2px 8px rgba(var(--ppla-theme-color-primary-rgb), 0.25);
+        }
+
+        --ppla-btn-hover-shadow: 0 4px 12px rgba(var(--ppla-theme-color-primary-dark-rgb), 0.35);
+        --ppla-btn-hover-transform: translateY(-2px);
+    }
+}

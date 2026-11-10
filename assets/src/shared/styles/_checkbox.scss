@@ -1,0 +1,113 @@
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+@mixin ppla-checkbox-control {
+
+	.ppla-checkbox-control {
+
+		@include helpers.ppla-scope {
+
+			.components-checkbox-control__input-container {
+
+				&:has(.components-checkbox-control__indeterminate) {
+
+					input[type="checkbox"] {
+						background-color: var(--ppla-color-primary);
+						border-color: var(--ppla-color-primary);
+
+						box-shadow: 0 2px 8px var(--ppla-ppla-color-primary);
+
+						&::before {
+							background-color: $white; 
+							mask-image: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27M5.5%2010.5h13v3H5.5z%27%2F%3E%3C%2Fsvg%3E);
+							transform: translate(-50%,-50%) scale(1);
+						}
+					}
+				}
+				
+				.components-checkbox-control__indeterminate {
+					display: none;
+				}
+
+				.components-checkbox-control__checked {
+					display: none;
+				}
+			}
+
+			input[type="checkbox"] {
+				position: relative;
+				margin: 0;
+				min-width: 0;
+				border: $border-width solid $gray-300;
+				border-radius: $radius-small;
+				background-color: $white;
+				appearance: none;
+				-webkit-appearance: none;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				transition: all 0.2s ease-in-out;
+
+				width: 16px;
+				height: 16px;
+
+				@include max-large {
+					width: 24px;
+					height: 24px;
+				}
+
+				&::before {
+				
+					margin: 0;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%,-50%) scale(0);
+					transition: transform 0.05s ease-in-out, background-color 0.2s ease-in-out;
+
+					content: "";
+					display: block;
+					width: 100%;
+					height: 100%;
+					
+					background-color: var(--ppla-color-primary);
+
+					-webkit-mask-image: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%274%27%2F%3E%3C%2Fsvg%3E);
+					mask-image: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%274%27%2F%3E%3C%2Fsvg%3E);
+
+					-webkit-mask-size: contain;
+					mask-size: contain;
+					-webkit-mask-repeat: no-repeat;
+					mask-repeat: no-repeat;
+					-webkit-mask-position: center;
+					mask-position: center;
+				}
+
+				&:checked {
+					background-color: var(--ppla-color-primary);
+					border-color: var(--ppla-color-primary);
+
+					box-shadow: 0 2px 8px rgba(var(--ppla-ppla-color-primary-rgb) 0.6);
+
+					&::before {
+						background-color: $white; 
+						-webkit-mask-image: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M14.83%204.89l1.34.94-5.81%208.38H9.02L5.78%209.67l1.34-1.25%202.57%202.4z%27%2F%3E%3C%2Fsvg%3E);
+						mask-image: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M14.83%204.89l1.34.94-5.81%208.38H9.02L5.78%209.67l1.34-1.25%202.57%202.4z%27%2F%3E%3C%2Fsvg%3E);
+						transform: translate(-52.5%,-50%) scale(1);
+					}
+
+				
+				}
+
+				&:disabled {
+					opacity: 0.5;
+					cursor: not-allowed;
+				}
+			}
+		
+		}
+	}
+}

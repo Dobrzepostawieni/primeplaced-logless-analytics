@@ -1,0 +1,177 @@
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+.ppla-content-sources {
+	display: flex;
+	flex-direction: column;
+	gap: $grid-unit-30;
+
+	.ppla-settings-card {
+		min-width: 0;
+	}
+
+	.ppla-settings-card-body {
+		display: flex;
+		flex: 1 1 auto;
+		flex-direction: column;
+		min-height: 0;
+	}
+
+	.ppla-datatable__wrapper {
+		display: flex;
+		flex: 1 1 auto;
+		flex-direction: column;
+	}
+
+	.ppla-datatable__actions {
+		flex-wrap: wrap;
+		gap: $grid-unit-10;
+	}
+
+	.ppla-datatable__table {
+		display: flex;
+		flex: 1 1 auto;
+		flex-direction: column;
+		overflow-x: auto;
+	}
+
+	.ppla-datatable__footer {
+		margin-block-start: auto;
+	}
+
+	.ppla-url-cell {
+		display: flex;
+		align-items: center;
+		gap: $grid-unit-10;
+
+		&-text {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			max-width: 300px;
+			display: inline-block;
+		}
+
+		@include helpers.ppla-scope {
+
+			&-copy {
+				color: inherit;
+				margin-block: -$grid-unit-15;
+				border: none;
+				padding: 0;
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 0.2s ease-in-out;
+			}
+		}
+	}
+
+	tr:hover .ppla-url-cell-copy,
+	.ppla-url-cell:hover .ppla-url-cell-copy,
+	.ppla-url-cell-copy.is-copied {
+
+		@include helpers.ppla-scope {
+			opacity: 1;
+			pointer-events: auto;
+		}
+	}
+
+	.ppla-progress-bar-wrapper {
+		display: flex;
+		align-items: center;
+		gap: $grid-unit-10;
+
+		.ppla-progress-bar {
+			width: 60px;
+			height: 4px;
+			overflow: hidden;
+			background-color: $gray-200;
+			border-radius: 2px;
+
+			&-fill {
+				height: 100%;
+				background-color: var(--ppla-color-primary);
+				border-radius: 2px;
+			}
+		}
+
+		span {
+			min-width: 36px;
+			font-weight: $font-weight-bold;
+		}
+	}
+
+	.ppla-source-label {
+		display: flex;
+		align-items: center;
+		gap: $grid-unit-10;
+
+		.dot {
+			flex-shrink: 0;
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+		}
+
+	}
+
+	.ppla-source-report-summary {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: $grid-unit-10 $grid-unit-20;
+		margin-block: 0 $grid-unit-20;
+		color: $gray-700;
+
+		&__current {
+			display: inline-flex;
+			align-items: baseline;
+			gap: $grid-unit-10;
+			font-size: 13px;
+
+			strong {
+				color: $gray-900;
+				font-size: 28px;
+				font-weight: 600;
+				line-height: 1.2;
+				font-variant-numeric: tabular-nums;
+			}
+		}
+
+		&__comparison {
+			display: inline-flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: $grid-unit-10;
+			font-size: 12px;
+			line-height: 1.5;
+		}
+
+		&__delta {
+			display: inline-flex;
+			align-items: center;
+			gap: 2px;
+			padding: $grid-unit-05 $grid-unit-10;
+			border-radius: $radius-small;
+			font-size: $font-size-small;
+			font-weight: $font-weight-bold;
+			line-height: 1;
+
+			&.is-positive {
+				color: #0a5c38;
+				background: #d7f2e4;
+			}
+
+			&.is-negative {
+				color: #8a2424;
+				background: #fbe3e3;
+			}
+
+			&.is-neutral {
+				color: $gray-700;
+				background: $gray-200;
+			}
+		}
+	}
+}

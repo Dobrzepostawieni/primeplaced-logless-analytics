@@ -1,0 +1,61 @@
+/* stylelint-disable selector-class-pattern */
+@use "sass:color";
+@use "./variables.scss" as *;
+
+@mixin ppla-scope {
+
+	:is(
+		#ppla-admin-root, 
+		#ppla-widget-root, 
+		#ppla-pricing-root, 
+		.ppla-modal, 
+		.components-popover__fallback-container
+	) & {
+		@content;
+	}
+}
+
+@mixin ppla-text-control-base {
+	border-radius: $radius-medium;
+	width: 100%;
+	min-height: 42px;
+	padding: $grid-unit-10;
+	box-sizing: border-box;
+	border: 1px solid #e0e0e0;
+	background: $white;
+	color: $gray-900;
+
+	&:focus {
+		border-color: var(--ppla-color-primary, #10b981);
+		box-shadow: var(--ppla-control-focus, 0 0 0 3px rgba(16, 185, 129, 0.16));
+		outline: none;
+	}
+
+	@include body-medium();
+}
+
+@mixin ppla-input-label-base {
+	display: block;
+	padding: 0;
+	margin: 0;
+	text-transform: none;
+	color: $gray-900;
+	font-size: 13px;
+	font-weight: $font-weight-bold;
+	line-height: 1.3;
+}
+
+@mixin ppla-badge-theme($base-color) {
+    color: color.adjust($base-color, $lightness: -15%);
+    background-color: color.mix($white, $base-color, 85%);
+	border-color: color.adjust($base-color, $lightness: -15%);
+}
+
+@mixin ppla-badge-theme-hover($base-color) {
+
+	&:hover:not(:disabled,[aria-disabled="true"], [aria-expanded="true"], .is-pressed) {
+    	color: color.adjust($base-color, $lightness: -25%);
+    	background-color: color.mix($white, $base-color, 75%);
+		border-color: color.adjust($base-color, $lightness: -25%);
+	}
+}

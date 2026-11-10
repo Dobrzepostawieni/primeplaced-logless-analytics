@@ -1,0 +1,570 @@
+# Copyright (C) 2026 Dobrzepostawieni
+# This file is distributed under the GPL-3.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: PrimePlaced - Logless Analytics 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/primeplaced-logless-analytics\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-04T08:15:40+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: primeplaced-logless-analytics\n"
+
+#. Plugin Name of the plugin
+#: primeplaced-logless-analytics.php
+msgid "PrimePlaced - Logless Analytics"
+msgstr ""
+
+#. Description of the plugin
+#: primeplaced-logless-analytics.php
+msgid "Privacy-first, cookieless WordPress analytics with local storage, data minimization, and explicit retention controls."
+msgstr ""
+
+#. Author of the plugin
+#: primeplaced-logless-analytics.php
+msgid "Dobrzepostawieni"
+msgstr ""
+
+#. Author URI of the plugin
+#: primeplaced-logless-analytics.php
+msgid "https://dobrzepostawieni.pl"
+msgstr ""
+
+#: Backend/SettingsPage.php:78
+#: Backend/SettingsPage.php:79
+#: Backend/SettingsPage.php:99
+msgid "Analytics dashboard"
+msgstr ""
+
+#. translators: 1: Plugin name, 2: Current page title
+#: Backend/SettingsPage.php:187
+#, php-format
+msgid "%1$s &lsaquo; %2$s"
+msgstr ""
+
+#: Backend/SettingsPage.php:197
+#: Backend/SettingsPage.php:199
+msgid "Logless Analytics"
+msgstr ""
+
+#: Data/DashboardRepository.php:894
+msgid "Home Page"
+msgstr ""
+
+#: Integrations/CronDispatcher.php:101
+msgid "Every 15 Minutes"
+msgstr ""
+
+#: Pro/Data/CommerceReportRepository.php:400
+msgid "Unclassified"
+msgstr ""
+
+#: Pro/Data/CommerceReportRepository.php:406
+msgid "Unnamed product"
+msgstr ""
+
+#: Pro/Data/CommerceReportRepository.php:607
+msgid "Unknown provider"
+msgstr ""
+
+#: Pro/Data/CommerceReportRepository.php:612
+#: Pro/Services/PdfReportService.php:498
+msgid "Direct"
+msgstr ""
+
+#: Pro/Data/FormRepository.php:351
+msgid "Unknown form"
+msgstr ""
+
+#. translators: 1: site name, 2: number of days.
+#: Pro/Data/ReportArchiveRepository.php:255
+#, php-format
+msgid "%1$s analytics snapshot (%2$d days)"
+msgstr ""
+
+#: Pro/Rest/ArchiveController.php:149
+msgid "The report archive could not be stored."
+msgstr ""
+
+#: Pro/Rest/ArchiveController.php:159
+msgid "Manual report archive snapshot created."
+msgstr ""
+
+#: Pro/Rest/EcommerceController.php:182
+#: Pro/Rest/FormController.php:193
+msgid "The selected report period is invalid."
+msgstr ""
+
+#: Pro/Rest/EventExportController.php:124
+msgid "Event export is available on the Agency plan."
+msgstr ""
+
+#: Pro/Rest/EventExportController.php:140
+#: Rest/ToolsController.php:403
+msgid "Cannot open output stream."
+msgstr ""
+
+#: Pro/Rest/EventStudioController.php:99
+msgid "Home"
+msgstr ""
+
+#: Pro/Rest/MainWpController.php:130
+msgid "The MainWP Dashboard transport is unavailable."
+msgstr ""
+
+#: Pro/Rest/MainWpController.php:156
+msgid "Confirm the purge operation before continuing."
+msgstr ""
+
+#: Pro/Rest/MainWpController.php:170
+msgid "The requested MainWP operation is invalid."
+msgstr ""
+
+#: Pro/Rest/MainWpController.php:173
+msgid "The MainWP operation could not be completed."
+msgstr ""
+
+#: Pro/Rest/MainWpController.php:218
+msgid "MainWP Dashboard is not active on this site."
+msgstr ""
+
+#: Pro/Rest/ReportController.php:212
+msgid "PDF reports are available on the Business plan and higher."
+msgstr ""
+
+#: Pro/Rest/ReportController.php:255
+msgid "WordPress did not confirm whether the test report was delivered. Check the recipient inbox and mail logs before trying again."
+msgstr ""
+
+#: Pro/Rest/ReportController.php:265
+msgid "The test report could not be sent. Check the recipient address and WordPress email delivery."
+msgstr ""
+
+#: Pro/Rest/ReportController.php:275
+msgid "Test report email sent."
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:68
+msgid "Top pages"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:68
+msgid "Page"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:68
+#: Pro/Services/PdfReportService.php:239
+msgid "Pageviews"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:68
+#: Pro/Services/PdfReportService.php:69
+#: Pro/Services/PdfReportService.php:71
+#: Pro/Services/PdfReportService.php:73
+msgid "Share"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:68
+msgid "No page data for this period."
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:69
+msgid "Top referrers"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:69
+msgid "Source"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:69
+#: Pro/Services/PdfReportService.php:73
+#: Pro/Services/PdfReportService.php:238
+msgid "Visits"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:69
+msgid "No referrer data for this period."
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:70
+msgid "Goals"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:70
+msgid "Goal"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:70
+msgid "Conversions"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:70
+msgid "Rate"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:70
+msgid "No goal conversion data for this period."
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:71
+msgid "Site search"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:71
+msgid "Search term"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:71
+msgid "Searches"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:71
+msgid "No internal search data for this period."
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:72
+msgid "Forms"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:72
+msgid "Form"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:72
+msgid "Form shown"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:72
+msgid "Form started"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:72
+msgid "Submitted"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:72
+msgid "Success rate"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:72
+msgid "No form conversion data for this period."
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:73
+msgid "Countries"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:73
+msgid "Country"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:73
+msgid "No country data for this period."
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:132
+msgid "PrimePlaced Analytics Report"
+msgstr ""
+
+#. translators: %d: number of days in the report period.
+#: Pro/Services/PdfReportService.php:192
+#, php-format
+msgid "last %d day"
+msgid_plural "last %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: date and time when the report was generated.
+#: Pro/Services/PdfReportService.php:197
+#, php-format
+msgid "Generated %s"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:235
+msgid "Overview"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:240
+msgid "Bounce rate"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:241
+msgid "Average visit duration"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:242
+msgid "Pages per visit"
+msgstr ""
+
+#: Pro/Services/PdfReportService.php:322
+msgid "Note"
+msgstr ""
+
+#. translators: %d: report period in days.
+#: Pro/Services/ReportDataService.php:153
+#, php-format
+msgid "Period: last %d days"
+msgstr ""
+
+#. translators: 1: unique visit count, 2: pageview count.
+#: Pro/Services/ReportDataService.php:158
+#, php-format
+msgid "KPI: %1$s visits · %2$s pageviews"
+msgstr ""
+
+#. translators: %d: number of referrer rows.
+#: Pro/Services/ReportDataService.php:164
+#, php-format
+msgid "Sources: %d report rows"
+msgstr ""
+
+#. translators: %d: number of top-page rows.
+#: Pro/Services/ReportDataService.php:169
+#, php-format
+msgid "Content: %d top pages"
+msgstr ""
+
+#. translators: %d: number of configured conversion rows.
+#: Pro/Services/ReportDataService.php:174
+#, php-format
+msgid "Conversions: %d configured rows"
+msgstr ""
+
+#. translators: %d: number of country aggregate rows.
+#: Pro/Services/ReportDataService.php:179
+#, php-format
+msgid "Geo: %d countries"
+msgstr ""
+
+#: Pro/Services/ReportDataService.php:182
+msgid "Empty sections mean that the feature was not enabled or no data was recorded for this period."
+msgstr ""
+
+#: Pro/Services/WeeklyReportMailer.php:70
+msgid "Weekly report email has no valid recipients."
+msgstr ""
+
+#: Pro/Services/WeeklyReportMailer.php:77
+msgid "Could not store the weekly report archive."
+msgstr ""
+
+#: Pro/Services/WeeklyReportMailer.php:92
+msgid "Could not create a temporary PDF filename."
+msgstr ""
+
+#: Pro/Services/WeeklyReportMailer.php:104
+msgid "Could not write the weekly PDF report to a temporary file."
+msgstr ""
+
+#: Pro/Services/WeeklyReportMailer.php:115
+msgid "The weekly report could not be protected against an uncertain email result."
+msgstr ""
+
+#: Pro/Services/WeeklyReportMailer.php:131
+msgid "WordPress could not send the weekly report email."
+msgstr ""
+
+#: Pro/Services/WeeklyReportMailer.php:137
+msgid "The weekly report was sent, but its archive status could not be updated."
+msgstr ""
+
+#: Pro/Services/WeeklyReportMailer.php:143
+msgid "Weekly report email sent successfully."
+msgstr ""
+
+#: Pro/Services/WeeklyReportMailer.php:154
+msgid "The weekly report was sent, but post-send bookkeeping failed."
+msgstr ""
+
+#: Pro/Services/WeeklyReportMailer.php:168
+msgid "WordPress could not send the weekly report, and failure bookkeeping did not complete."
+msgstr ""
+
+#: Pro/Services/WeeklyReportMailer.php:187
+msgid "Weekly report email failed because an unexpected error occurred."
+msgstr ""
+
+#. translators: %s: site name.
+#: Pro/Services/WeeklyReportMailer.php:317
+#, php-format
+msgid "Weekly analytics report for %s"
+msgstr ""
+
+#. translators: 1: site URL, 2: weekly report summary.
+#: Pro/Services/WeeklyReportMailer.php:340
+#, php-format
+msgid ""
+"Your weekly PrimePlaced analytics report for %1$s is attached.\n"
+"\n"
+"%2$s\n"
+"\n"
+"This report was generated locally by your WordPress site."
+msgstr ""
+
+#: Rest/AnalyticsController.php:75
+msgid "Number of calendar days, including today."
+msgstr ""
+
+#: Rest/CustomEventsController.php:131
+msgid "Provide an event name, a supported trigger, and a CSS selector when the trigger needs one."
+msgstr ""
+
+#: Rest/CustomEventsController.php:152
+msgid "The custom event could not be created. Event names must be unique."
+msgstr ""
+
+#: Rest/CustomEventsController.php:172
+msgid "The custom event could not be found."
+msgstr ""
+
+#: Rest/CustomEventsController.php:189
+msgid "The custom event could not be updated."
+msgstr ""
+
+#. translators: %d: maximum number of active custom events.
+#: Rest/CustomEventsController.php:212
+#, php-format
+msgid "You can have at most %d active custom events. Disable or delete one first."
+msgstr ""
+
+#: Rest/CustomEventsController.php:231
+msgid "The custom event could not be removed."
+msgstr ""
+
+#. translators: %s: Request parameter name.
+#: Rest/ReportViewsController.php:334
+#, php-format
+msgid "%s must be a JSON object."
+msgstr ""
+
+#: Rest/SettingsController.php:197
+#: Rest/SettingsController.php:243
+#: Rest/SettingsController.php:325
+#: Rest/SettingsController.php:396
+msgid "Settings are being saved by another request. Please retry."
+msgstr ""
+
+#: Rest/SettingsController.php:214
+msgid "Settings could not be saved."
+msgstr ""
+
+#: Rest/SettingsController.php:259
+msgid "This request came through a proxy or CDN, so the detected address belongs to the proxy and is shared by your visitors. Enable Trust proxy headers in Advanced settings first."
+msgstr ""
+
+#: Rest/SettingsController.php:270
+msgid "No public address could be detected. Local sites often expose 127.0.0.1 or ::1; use Ignore administrators for this preview, or configure a trusted public proxy before trying again."
+msgstr ""
+
+#: Rest/SettingsController.php:290
+msgid "The exclusion could not be saved. Please retry."
+msgstr ""
+
+#: Rest/SettingsController.php:301
+msgid "Your current address is now excluded from analytics."
+msgstr ""
+
+#: Rest/SettingsController.php:302
+msgid "Your current address is already excluded from analytics."
+msgstr ""
+
+#: Rest/SettingsController.php:350
+msgid "The reset could not create an undo snapshot. No settings were changed."
+msgstr ""
+
+#: Rest/SettingsController.php:362
+msgid "Settings could not be reset."
+msgstr ""
+
+#: Rest/SettingsController.php:409
+msgid "The reset undo window has expired. Nothing was changed."
+msgstr ""
+
+#: Rest/SettingsController.php:420
+msgid "Previous settings could not be restored."
+msgstr ""
+
+#: Rest/ToolsController.php:219
+msgid "Unable to flush the analytics buffer."
+msgstr ""
+
+#: Rest/ToolsController.php:252
+msgid "Unable to read the analytics buffer status."
+msgstr ""
+
+#: Rest/ToolsController.php:263
+msgid "Unable to read the analytics buffer table."
+msgstr ""
+
+#: Rest/ToolsController.php:306
+#: Rest/ToolsController.php:309
+msgid "The number of days must be a positive number or \"all\"."
+msgstr ""
+
+#: Rest/ToolsController.php:315
+msgid "Analytics data could not be cleared."
+msgstr ""
+
+#: Rest/ToolsController.php:336
+msgid "Database statistics could not be read."
+msgstr ""
+
+#: Rest/ToolsController.php:351
+msgid "Analytics tables could not be optimized."
+msgstr ""
+
+#: Rest/TrackingController.php:627
+msgid "Events payload must be valid JSON."
+msgstr ""
+
+#: Rest/TrackingController.php:636
+msgid "Events payload must be an array."
+msgstr ""
+
+#: Rest/TrackingController.php:644
+msgid "Events payload contains too many items."
+msgstr ""
+
+#: Rest/TrackingController.php:653
+msgid "Each event must be an object."
+msgstr ""
+
+#: Rest/TrackingController.php:661
+msgid "Each event must define a type."
+msgstr ""
+
+#: Rest/TrackingController.php:699
+msgid "Tracking hit ID is invalid."
+msgstr ""
+
+#: Services/ReportViewService.php:147
+msgid "The saved view could not be created. Please try again."
+msgstr ""
+
+#: Services/ReportViewService.php:181
+msgid "The saved view could not be updated. Please try again."
+msgstr ""
+
+#: Services/ReportViewService.php:210
+msgid "The saved view could not be removed. Please try again."
+msgstr ""
+
+#: Services/ReportViewService.php:269
+msgid "Deleted user"
+msgstr ""
+
+#: Services/ReportViewService.php:412
+msgid "Provide a valid report, name, range, and view configuration."
+msgstr ""
+
+#: Services/ReportViewService.php:421
+msgid "The saved view no longer exists."
+msgstr ""
+
+#: Services/ReportViewService.php:430
+msgid "Only the author or a site administrator can change this saved view."
+msgstr ""

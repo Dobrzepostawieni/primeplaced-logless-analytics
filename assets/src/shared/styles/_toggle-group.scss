@@ -1,0 +1,69 @@
+/* stylelint-disable no-descending-specificity */
+@use "styles/variables" as *;
+
+@mixin ppla-toggle-group-control {
+
+.ppla-toggle-group-control {
+	display: inline-flex;
+	width: 100%;
+	max-width: fit-content;
+
+	.components-toggle-group-control {
+		background-color: $white;
+		border: 1px solid $gray-200;
+		border-radius: $radius-medium;
+		height: 40px;
+		min-height: 40px;
+		width: 100%;
+
+		min-width: 200px;
+
+		&::before {
+			background-color: var(--ppla-color-primary-lighter);
+			border-color: var(--ppla-color-primary);
+			border-radius: $radius-medium;
+		}
+
+		@include max-medium {
+			height: 42px;
+			min-height: 42px;
+		}
+	}
+
+	.components-toggle-group-control-option-base {
+		border-radius: calc(#{$radius-medium} - 2px);
+		color: $gray-700;
+		font-weight: $font-weight-medium;
+		border: none;
+		background: transparent;
+		transition: 
+			background-color 0.2s ease-in-out,
+			color 0.2s ease-in-out,
+			font-weight 0.2s ease-in-out,
+			box-shadow 0.2s ease-in-out;
+
+
+		&[aria-checked="true"] {
+			background-color: transparent;
+			
+			border: none;
+			color: var(--ppla-theme-color-primary-text);
+
+			&:hover:not([disabled]):not([aria-disabled="true"]) {
+				font-weight: $font-weight-bold;
+				color: var(--ppla-theme-color-primary-text);
+			}
+		}
+
+		&:focus:not(:disabled) {
+			outline: 2px solid var(--wp-admin-theme-color, var(--ppla-color-primary));
+			outline-offset: -2px;
+		}
+
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+	}
+}
+}

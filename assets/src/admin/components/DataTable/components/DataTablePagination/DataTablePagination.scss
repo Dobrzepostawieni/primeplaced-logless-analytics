@@ -1,0 +1,47 @@
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+.ppla-datatable__pagination {
+
+	@include helpers.ppla-scope {
+
+		position: relative;
+		z-index: 3;
+		display: flex;
+		gap: $grid-unit-10;
+		align-items: center;
+		justify-content: space-between;
+		width: fit-content;
+
+		&-select.ppla-select-control {
+			width: auto;
+			min-width: 56px;
+			margin: 0;
+		}
+
+		&-arrows:is(.ppla-button).is-tertiary {
+			--ppla-btn-color: #{$gray-900};
+			--ppla-btn-border: transparent;
+			--ppla-btn-hover-bg: var(--ppla-color-primary-lighter);
+    		--ppla-btn-hover-border: transparent;
+			--ppla-btn-hover-color: var(--ppla-color-primary);
+			padding: #{$grid-unit-05};
+		}
+
+		&-wrapper {
+			display: flex;
+			align-items: center;
+			gap: $grid-unit-10;		
+			
+			@include max-medium {
+				margin-right: auto;
+			}
+		}
+
+		@include max-medium {
+			
+			width: 100%;
+		}
+	}
+}

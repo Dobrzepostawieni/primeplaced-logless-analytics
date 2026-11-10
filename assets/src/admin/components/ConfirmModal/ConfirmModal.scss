@@ -1,0 +1,17 @@
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+.ppla-confirmation-modal {
+
+	@include helpers.ppla-scope {
+
+		&__text {
+			color: $gray-900;
+
+			@include body-medium;
+
+			margin-block: $grid-unit-20;
+		}
+
+	}
+}

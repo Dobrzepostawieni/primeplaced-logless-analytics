@@ -1,0 +1,666 @@
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+.ppla-datatable {
+
+	@include helpers.ppla-scope {
+		table-layout: fixed;
+		min-width: 100%;
+		width: max-content;
+		vertical-align: top;
+		border: 0;
+		border-collapse: separate;
+		border-spacing: 0 $grid-unit-15;
+
+		@include max-medium {
+			min-width: 0;
+			max-width: 100%;
+			width: auto;
+			margin-right: 1px;
+		}
+
+		&__wrapper {
+			display: flex;
+			flex-direction: column;
+			box-sizing: border-box;
+			max-width: 100%;
+
+			* {
+				box-sizing: border-box;
+			}
+		}
+
+		&__table {
+			display: block;
+			max-width: 100%;
+			overflow-x: auto;
+			overflow-y: visible;
+			position: relative;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-gutter: auto;
+		}
+
+		&__loading-boundary {
+			position: relative;
+			isolation: isolate;
+			min-height: 160px;
+		}
+
+		&__loading-overlay {
+			position: absolute;
+			inset: 0;
+			z-index: 10;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: rgba(255, 255, 255, 0.5);
+			cursor: progress;
+
+			.ppla-spinner {
+				margin: 0;
+			}
+		}
+
+		.ppla-datatable__action-cell-inner {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			gap: $grid-unit-05;
+
+			.ppla-expander-btn {
+				margin-left: 2px;
+			}
+		}
+
+		.ppla-datatable__body-row {
+
+			&.is-clickable {
+				cursor: pointer;
+
+				&:focus-visible {
+					outline: 2px solid var(--ppla-color-primary);
+					outline-offset: 2px;
+				}
+			}
+
+			td:first-child {
+				transition: border-color 0.2s ease;
+				border-left: 3px solid $gray-200;
+				padding-left: calc(#{$grid-unit-15} - 3px);
+
+				@include max-medium {
+					padding-left: calc(#{$grid-unit-10} - 3px);
+				}
+			}
+
+			&.is-disabled {
+				border-left-color: $gray-300;
+
+				.ppla-toggle-control {
+
+					.components-form-toggle__track {
+						border-color: $gray-300;
+						background: $gray-300;
+					}
+
+					&-badge {
+
+						@include helpers.ppla-badge-theme($gray-300);
+					}
+				}
+			}
+
+			&:not(.is-disabled).is-selected::before,
+			&:not(.is-disabled).is-selected td:first-child {
+				border-left-color: var(--ppla-color-primary);
+			}
+
+			&:not(.is-disabled).is-green::before,
+			&:not(.is-disabled).is-green td:first-child {
+				border-left-color: $alert-ppla-green;
+			}
+
+			&:not(.is-disabled).is-gray::before,
+			&:not(.is-disabled).is-gray td:first-child {
+				border-left-color: $gray-300;
+			}
+
+			&:not(.is-disabled).is-red::before,
+			&:not(.is-disabled).is-red td:first-child {
+				border-left-color: $alert-red;
+			}
+
+			&:not(.is-disabled).is-blue::before,
+			&:not(.is-disabled).is-blue td:first-child {
+				border-left-color: $alert-blue;
+			}
+		}
+
+		&__action-primary {
+			position: absolute;
+			top: 1px;
+			right: 0;
+			z-index: 1;
+			display: flex;
+			align-items: center;
+			transition:
+				opacity 0.2s ease-in-out,
+				transform 0.2s ease-in-out;
+			padding: $grid-unit-15;
+			height: 100%;
+			background-color: $white;
+			border-left: $border-width solid $gray-200;
+
+			.ppla-button {
+				opacity: 0;
+				pointer-events: none;
+				transition-delay: 0.2s;
+			}
+
+			transform-origin: center right;
+
+			&:not(:has(+ .components-dropdown)) {
+				transform: scaleX(0);
+			}
+
+			&:has(+ .components-dropdown) {
+				transform: translateX(calc(36px + #{$grid-unit-15})) scaleX(0);
+
+				@include max-medium {
+					transform: translateX(calc(42px + #{$grid-unit-15}))
+						scaleX(0);
+				}
+			}
+		}
+
+		thead th,
+		tbody td {
+			z-index: 2;
+			padding: $grid-unit-15;
+			background: transparent;
+
+			&:first-child,
+			&.ppla-datatable__body-actions,
+			&.ppla-datatable__head-actions,
+			&:last-child {
+				z-index: 3;
+			}
+
+			&:not(:first-child) {
+
+				@include max-medium {
+					padding: $grid-unit-10;
+					max-width: 110px;
+				}
+			}
+		}
+
+		thead th {
+			color: $gray-900;
+
+			@include body-small;
+			font-weight: $font-weight-medium;
+			text-transform: uppercase;
+			text-align: left;
+			letter-spacing: 0.5px;
+
+			.components-dropdown {
+				width: auto;
+				margin: 0;
+				padding: 0;
+			}
+
+			&:not(.ppla-datatable__head-all, .ppla-datatable__head-actions) {
+				position: relative;
+			}
+		}
+
+		&__head-btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: flex-start;
+			gap: $grid-unit-05;
+			width: auto;
+			min-height: 0;
+			color: $gray-900;
+			padding: $grid-unit-05 $grid-unit-10;
+			border: 0;
+			border-radius: $radius-small;
+			background: transparent;
+			box-shadow: none;
+			cursor: pointer;
+			transition: background-color 0.18s ease, color 0.18s ease;
+
+			@include body-small;
+			font-weight: $font-weight-medium;
+			text-transform: uppercase;
+			text-align: left;
+			letter-spacing: 0.5px;
+
+			&:hover:not(:disabled),
+			&.is-open {
+				background: color-mix(in srgb, var(--ppla-theme-color-primary) 9%, $white);
+				color: var(--ppla-theme-color-primary-text);
+			}
+
+			&:focus-visible {
+				outline: 2px solid var(--ppla-color-primary);
+				outline-offset: 3px;
+			}
+		}
+
+		&__head-dropdown-content {
+
+			.components-menu-item__button {
+				height: 36px;
+				padding-block: $grid-unit-05;
+				padding-inline: $grid-unit-10;
+				transition:
+					background-color 0.2s ease-in-out,
+					color 0.2s ease-in-out,
+					font-weight 0.2s ease-in-out;
+
+				&:hover:not(:disabled, [aria-disabled="true"], .is-pressed) {
+					color: var(--ppla-theme-color-primary-text);
+					background: var(--ppla-color-primary-lighter);
+				}
+			}
+		}
+
+		tbody {
+
+			tr {
+				transition: all 0.2s;
+				height: calc(#{$grid-unit-80} - 1px);
+				position: relative;
+
+				@include max-medium {
+					height: 88px;
+				}
+
+				&:not(.ppla-datatable__expanded-row)::before {
+					content: "";
+					border: $border-width solid $gray-200;
+					background: $white;
+					position: absolute;
+					z-index: 2;
+					left: 0;
+					right: 0;
+					box-sizing: border-box;
+					height: $grid-unit-80;
+					box-shadow: $elevation-x-small;
+					border-radius: $radius-medium;
+					border-left: 3px solid $gray-200;
+					transition:
+						border-color 0.2s ease-in-out,
+						box-shadow 0.2s ease-in-out,
+						transform 0.2s ease-in-out;
+
+					@include max-medium {
+						height: 90px;
+					}
+				}
+
+				&.is-pro {
+					--ppla-color-primary: var(--ppla-theme-color-primary);
+					--ppla-gradient: var(--ppla-theme-gradient);
+				}
+
+				&:hover,
+				&:has(.components-dropdown [aria-expanded="true"]),
+				&:has(.ppla-datatable__action-primary > .ppla-button:focus) {
+
+					&::before {
+						box-shadow: $elevation-small;
+					}
+
+					.ppla-datatable__action-primary {
+
+						.ppla-button {
+							transition-delay: 0;
+							pointer-events: all;
+							opacity: 1;
+						}
+
+						&:not(:has(+ .components-dropdown)) {
+							transform: scaleX(1);
+						}
+
+						&:has(+ .components-dropdown) {
+							transform: translateX(
+									calc(-36px - #{$grid-unit-15})
+								)
+								scaleX(1);
+
+							@include max-medium {
+								transform: translateX(
+										calc(-42px - #{$grid-unit-15})
+									)
+									scaleX(1);
+							}
+						}
+					}
+
+					.ppla-datatable__body-actions {
+						border: none;
+					}
+				}
+			}
+
+			td:not(.ppla-datatable__body-all, .ppla-datatable__body-actions) {
+				position: relative;
+			}
+		}
+
+		&.ppla-datatable--compact {
+
+			tbody tr {
+				height: calc(#{$grid-unit-60} - 1px);
+
+				@include max-medium {
+					height: calc(#{$grid-unit-70} - 1px);
+				}
+
+				&:not(.ppla-datatable__expanded-row)::before {
+					height: $grid-unit-60;
+
+					@include max-medium {
+						height: $grid-unit-70;
+					}
+				}
+			}
+		}
+
+		thead {
+
+			tr {
+				height: calc(#{$grid-unit-80} - 2px);
+				position: relative;
+
+				&::before {
+					content: "";
+					border: $border-width solid $gray-200;
+					background: $white;
+					position: absolute;
+					z-index: 2;
+					left: 0;
+					right: 0;
+					transform: none;
+					box-sizing: border-box;
+					height: $grid-unit-80;
+					box-shadow: $elevation-small;
+					border-radius: $radius-medium;
+				}
+			}
+		}
+
+		&__head-fixed-left,
+		&__body-fixed-left {
+			position: sticky;
+			left: 0;
+			z-index: 4;
+			background: transparent;
+			box-shadow: none;
+		}
+
+		&__head-fixed-left {
+			z-index: 5;
+		}
+
+		&.is-scrolled-horizontally {
+
+			.ppla-datatable__head-fixed-left,
+			.ppla-datatable__body-fixed-left {
+				background: $white;
+				box-shadow: inset -1px 0 0 $gray-200;
+			}
+		}
+
+		&__actions {
+			position: sticky;
+			left: 0;
+		}
+
+		&__cell {
+
+			&-wrapper {
+				display: flex;
+				align-items: center;
+				white-space: nowrap;
+				min-width: 21ch;
+				max-width: 80ch;
+			}
+
+			&-text {
+				position: relative;
+				color: $gray-700;
+
+				@include heading-small;
+				display: flex;
+				align-items: center;
+				gap: $grid-unit-10;
+
+				svg {
+					width: 16px;
+					height: 16px;
+					fill: $gray-700;
+				}
+			}
+		}
+
+		&__footer {
+
+			.components-checkbox-control__input-container,
+			.components-checkbox-control__input {
+				margin-right: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+			color: $gray-900;
+			padding: $grid-unit-15;
+
+			@include body-small;
+			text-align: left;
+			height: calc(#{$grid-unit-80} - 2px);
+			width: 100%;
+			position: sticky;
+			z-index: 3;
+			left: 0;
+
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			span {
+				display: flex;
+				gap: $grid-unit-10;
+				white-space: nowrap;
+			}
+
+			&::before {
+				content: "";
+				border: $border-width solid $gray-200;
+				background: $white;
+				position: absolute;
+				z-index: 2;
+				left: 1px;
+				top: 0;
+				right: 1px;
+				transform: translateY(-1px) translateX(-1px);
+				width: calc(100% - 2px);
+				height: calc(100% - 2px);
+				box-shadow: $elevation-small;
+				border-radius: $radius-medium;
+
+				@include max-medium {
+					left: 0;
+					right: 0;
+					width: 100%;
+				}
+			}
+
+			@include max-medium {
+
+				&:has(> .ppla-datatable__pagination) {
+					flex-direction: column;
+					height: 102px;
+				}
+			}
+		}
+
+		&__action-dropdown {
+
+			&-group div[role="group"] {
+				display: flex;
+				flex-direction: column;
+				gap: $grid-unit-10;
+			}
+		}
+
+		&__bulk-checkbox {
+			display: flex;
+			align-items: center;
+			height: 36px;
+		}
+
+		&__empty {
+			text-align: center;
+
+			&-text {
+				margin: 0;
+				color: $gray-700;
+
+				@include heading-medium;
+				line-height: calc(#{$grid-unit-80} - 2px);
+				position: absolute;
+				z-index: 3;
+				left: $grid-unit-20;
+				right: $grid-unit-20;
+				transform: translateY(calc(-50% + 2px));
+			}
+		}
+
+		@include max-medium {
+
+			table.ppla-datatable {
+				width: 100%;
+				min-width: unset;
+				table-layout: auto;
+			}
+
+			.ppla-datatable__body-row.is-expanded {
+
+				&::before,
+				.ppla-datatable__body-all {
+					border-bottom-left-radius: 0;
+					border-bottom-right-radius: 0;
+					border-bottom-color: transparent;
+				}
+
+				td {
+					border-bottom-color: transparent;
+				}
+			}
+
+			tr.ppla-datatable__expanded-row {
+				height: auto;
+
+				td {
+					padding: 0;
+					border: none;
+					background: transparent;
+
+					&::before {
+						display: none;
+					}
+				}
+
+				&.is-pro .ppla-datatable__expanded-content::before {
+					--ppla-color-primary: var(--ppla-theme-color-primary);
+				}
+
+				&.is-selected .ppla-datatable__expanded-content::before {
+					border-left-color: var(--ppla-color-primary);
+				}
+
+				&.is-green .ppla-datatable__expanded-content::before {
+					border-left-color: $alert-ppla-green;
+				}
+
+				&.is-gray .ppla-datatable__expanded-content::before {
+					border-left-color: $gray-300;
+				}
+
+				&.is-red .ppla-datatable__expanded-content::before {
+					border-left-color: $alert-red;
+				}
+
+				&.is-blue .ppla-datatable__expanded-content::before {
+					border-left-color: $alert-blue;
+				}
+
+				&.is-disabled .ppla-datatable__expanded-content::before {
+					border-left-color: $gray-300;
+				}
+			}
+
+			.ppla-datatable__expanded-content {
+				position: relative;
+				z-index: 3;
+				padding: 0 $grid-unit-20 $grid-unit-20
+					calc(#{$grid-unit-20} + 3px);
+				margin-top: calc($grid-unit-15 * -1);
+				display: flex;
+				flex-direction: column;
+				gap: $grid-unit-15;
+				max-width: 100%;
+
+				&::before {
+					content: "";
+					border: $border-width solid $gray-200;
+					border-top: none;
+					background: $white;
+					position: absolute;
+					z-index: 2;
+					left: 0;
+					right: 0;
+					width: calc(100% - 3px);
+					height: 100%;
+					box-shadow: $elevation-small;
+					border-bottom-left-radius: $radius-medium;
+					border-bottom-right-radius: $radius-medium;
+					border-left: 3px solid $gray-200;
+					transition: border-color 0.2s ease-in-out;
+				}
+			}
+
+			.ppla-datatable__expanded-item {
+				position: relative;
+				z-index: 4;
+				display: flex;
+				flex-direction: column;
+				gap: $grid-unit-05;
+				padding-top: $grid-unit-15;
+				border-top: 1px dashed $gray-200;
+			}
+
+			.ppla-datatable__expanded-label {
+				color: $gray-700;
+
+				@include body-small;
+				font-weight: $font-weight-bold;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+			}
+
+			.ppla-datatable__expanded-value {
+				color: $gray-900;
+
+				@include body-medium
+			}
+		}
+	}
+}

@@ -1,0 +1,135 @@
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+.ppla-datatable-search-control {
+
+	@include helpers.ppla-scope {
+		display: block;
+		width: min(250px, 100%);
+		min-width: 250px;
+		margin: 0;
+		border: 1px solid $gray-300;
+		border-radius: $radius-medium;
+		background: $white;
+		overflow: hidden;
+		transition:
+			border-color 0.18s ease,
+			box-shadow 0.18s ease;
+
+		&:focus-within {
+			border-color: var(--ppla-color-primary);
+			box-shadow: 0 0 0 1px var(--ppla-color-primary);
+		}
+
+		.components-input-control__container {
+			min-height: 40px;
+			border: 0;
+			border-radius: 0;
+			background: transparent;
+		}
+
+		.components-input-control__backdrop {
+			display: none;
+		}
+
+		.components-input-control__prefix {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 42px;
+			padding: 0;
+			border-inline-end: 1px solid $gray-200;
+			color: $gray-800;
+		}
+
+		input.components-input-control__input {
+			width: 100%;
+			height: 40px;
+			padding: 0 $grid-unit-10;
+			border: 0;
+			border-radius: 0;
+			background: transparent;
+			box-shadow: none;
+			outline: none;
+
+			@include body-medium;
+
+			@include max-medium {
+				height: 42px;
+			}
+		}
+
+		svg {
+			fill: $gray-800;
+
+			width: $icon-size * 1.2;
+			height: $icon-size * 1.2;
+
+			@include max-large {
+				width: $icon-size * 1.4;
+				height: $icon-size * 1.4;
+			}
+		}
+
+		.components-input-control__suffix {
+			margin-inline-end: $grid-unit-05;
+
+			.components-button {
+				border: 0;
+				border-radius: 0;
+				box-shadow: none;
+			}
+		}
+
+		@include max-large {
+			min-width: 200px;
+		}
+
+		@include max-small {
+			min-width: unset;
+		}
+	}
+}
+
+.ppla-datatable-search-button {
+
+	@include helpers.ppla-scope {
+		position: relative;
+
+		width: 40px;
+		height: 40px;
+
+		@include max-medium {
+			width: 42px;
+			height: 42px;
+		}
+
+		&.is-active {
+			background: var(--ppla-color-primary-lighter);
+		}
+
+		&-number {
+			position: absolute;
+			top: 0;
+			right: 0;
+			transform: translate(50%, -50%);
+
+			border-radius: 50%;
+
+			width: $grid-unit-20;
+			height: $grid-unit-20;
+
+			color: $white;
+			background: var(--ppla-color-primary);
+
+			box-shadow: 0 2px 8px rgba(var(--ppla-color-primary-rgb), 0.3);
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			@include body-small;
+		}
+	}
+}

@@ -1,0 +1,41 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"jsx": "react-jsx",
+		"noImplicitAny": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"allowJs": true,
+		"checkJs": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"noEmit": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"sourceMap": true,
+		"strict": true,
+		"types": [
+			"node",
+			"react"
+		],
+		"paths": {
+			"@admin/*": [
+				"./assets/src/admin/*"
+			],
+			"@shared/*": [
+				"./assets/src/shared/*"
+			],
+			"@features/*": [
+				"./assets/src/admin/features/*"
+			],
+			"@images/*": [
+				"./assets/images/*"
+			]
+		}
+	},
+	"include": [
+		"assets/src/**/*"
+	]
+}

@@ -1,0 +1,126 @@
+/* WordPress component selectors and the plugin's BEM classes retain their public names. */
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+
+.ppla-saved-views-dropdown {
+	min-width: 320px;
+	max-width: 380px;
+	padding: $grid-unit-20;
+	background: $white;
+
+	.components-base-control__label {
+		margin-block-end: $grid-unit-05;
+		color: $gray-900;
+		font-size: $font-size-small;
+		font-weight: $font-weight-bold;
+	}
+
+	.components-base-control__help {
+		margin-block-start: $grid-unit-05;
+		color: $ppla-text-muted;
+		line-height: 1.45;
+	}
+
+	.components-text-control__input {
+		width: 100%;
+	}
+
+	> .ppla-button {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.components-base-control {
+		margin-block-end: $grid-unit-10;
+	}
+
+	// Name, visibility and the save button each need their own row of space.
+	&__form {
+		display: flex;
+		flex-direction: column;
+		gap: $grid-unit-20;
+
+		.components-base-control {
+			margin-block-end: 0;
+		}
+	}
+
+	&__form-actions {
+		display: flex;
+		align-items: center;
+		gap: $grid-unit-10;
+
+		> .ppla-button:first-child {
+			flex: 1;
+		}
+	}
+
+	&__status {
+		margin: $grid-unit-15 0 0;
+		color: $ppla-text-muted;
+		font-size: $font-size-small;
+		line-height: 1.45;
+	}
+
+	.components-menu-group {
+		margin-block-start: $grid-unit-20;
+		padding-block-start: $grid-unit-15;
+		border-block-start: 1px solid $gray-200;
+
+		.components-menu-group__label {
+			padding-inline: $grid-unit-10;
+			color: $ppla-text-muted;
+			font-size: $font-size-small;
+			font-weight: $font-weight-bold;
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+		}
+	}
+
+	.components-menu-item__button {
+		border-radius: $radius-small;
+	}
+
+	.ppla-saved-view-menu-item {
+		position: relative;
+		padding-block-end: $grid-unit-10;
+
+		&__meta {
+			display: flex;
+			justify-content: space-between;
+			gap: $grid-unit-10;
+			padding-inline: $grid-unit-10;
+			color: $ppla-text-muted;
+			font-size: $font-size-small;
+			line-height: 1.35;
+
+			span:last-child {
+				flex: 0 0 auto;
+				font-weight: $font-weight-medium;
+			}
+		}
+
+		&__actions {
+			display: flex;
+			align-items: center;
+			gap: $grid-unit-05;
+			padding-inline: $grid-unit-10;
+			padding-block-start: $grid-unit-05;
+
+			.components-button {
+				min-width: 32px;
+				min-height: 32px;
+				padding: $grid-unit-05;
+
+				&.is-destructive {
+					color: $alert-red;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 600px) {
+		min-width: min(320px, calc(100vw - 32px));
+		max-width: calc(100vw - 32px);
+	}
+}

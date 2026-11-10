@@ -1,0 +1,159 @@
+/* stylelint-disable selector-class-pattern, no-descending-specificity */
+@use "styles/variables" as *;
+
+.ppla-report-table-section__split-body {
+	display: block !important;
+	padding: 0 !important;
+	container: ppla-report-split / inline-size;
+}
+
+.ppla-resizable-report-split {
+	--ppla-resizable-table-width: 62%;
+	display: grid;
+	grid-template-columns: minmax(0, var(--ppla-resizable-table-width)) 18px minmax(0, 1fr);
+	min-width: 0;
+	min-height: 280px;
+	width: 100%;
+	isolation: isolate;
+
+	&__panel {
+		min-width: 0;
+		padding: $grid-unit-20;
+		position: relative;
+	}
+
+	&__table {
+		z-index: 0;
+	}
+
+	&__aside {
+		z-index: 1;
+		background: $white;
+		border-inline-start: 0;
+	}
+
+	&__handle {
+		align-self: stretch;
+		justify-self: center;
+		width: 18px;
+		min-width: 18px;
+		height: 100%;
+		margin: 0;
+		padding: 0 !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+		background: transparent !important;
+		box-shadow: none !important;
+		color: $gray-500;
+		cursor: col-resize;
+		position: relative;
+		z-index: 2;
+
+		&::before {
+			content: '';
+			position: absolute;
+			inset-block: 0;
+			inset-inline-start: 50%;
+			width: 1px;
+			background: $gray-200;
+			transform: translateX(-50%);
+			transition: background-color 160ms ease, width 160ms ease;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 16px;
+			height: 44px;
+			border: 1px solid $gray-300;
+			border-radius: $radius-medium;
+			background: $white;
+			box-shadow: $elevation-x-small;
+			transform: translate(-50%, -50%);
+			transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+		}
+
+		&:hover,
+		&:focus-visible,
+		.ppla-resizable-report-split.is-dragging & {
+			color: var(--ppla-theme-color-primary-text);
+
+			&::before {
+				width: 2px;
+				background: var(--ppla-color-primary);
+			}
+
+			&::after {
+				border-color: var(--ppla-color-primary);
+				box-shadow: 0 0 0 3px rgba(var(--ppla-color-primary-rgb), 0.14), $elevation-x-small;
+				transform: translate(-50%, -50%) scale(1.04);
+			}
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--ppla-color-primary);
+			outline-offset: -2px;
+		}
+
+		svg {
+			position: relative;
+			z-index: 1;
+			width: 14px;
+			height: 14px;
+		}
+	}
+
+	&.is-dragging {
+		user-select: none;
+
+		.ppla-resizable-report-split__handle {
+			cursor: grabbing;
+		}
+	}
+}
+
+// Report tables need about 1000px for all columns. Below that the table takes
+// the full width and the chart becomes a compact band above it.
+@container ppla-report-split (max-width: 1599px) {
+
+	.ppla-resizable-report-split {
+		grid-template-columns: minmax(0, 1fr);
+		min-height: 0;
+
+		&__handle {
+			display: none;
+		}
+
+		&__aside {
+			order: -1;
+			border-block-end: 1px solid $gray-200;
+		}
+	}
+}
+
+@container ppla-report-split (min-width: 720px) and (max-width: 1599px) {
+
+	.ppla-sources-chart:not(.ppla-sources-chart--no-canvas) {
+		display: grid;
+		grid-template-columns: minmax(0, 3fr) minmax(220px, 2fr);
+		align-items: start;
+		column-gap: $grid-unit-40;
+
+		.ppla-sources-chart__heading,
+		.ppla-sources-chart__empty {
+			grid-column: 1 / -1;
+		}
+
+		.ppla-sources-chart__canvas {
+			height: 220px;
+			min-height: 0;
+		}
+	}
+}
+
+body.ppla-is-resizing-report {
+	cursor: col-resize !important;
+	user-select: none !important;
+}

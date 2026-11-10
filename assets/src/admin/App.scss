@@ -1,0 +1,473 @@
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+@use "styles/root" as *;
+@use "shared/styles" as shared;
+@use "styles/pricing";
+@use "shared/components/AppHeader/AppHeader";
+@use "shared/components/DashboardStats/DashboardStats";
+@use "shared/components/MeasurementStateNotice/MeasurementStateNotice";
+@use "shared/components/Notices/Notices";
+@use "shared/components/PplaToggler/PplaToggler";
+@use "admin/components/AnimatedTabs/AnimatedTabs";
+@use "admin/components/ConfirmModal/ConfirmModal";
+@use "admin/components/DataTable/DataTable";
+@use "admin/components/ReportTableActions/ExportMenu";
+@use "admin/components/DataTable/components/DataTableAppearance/DataTableAppearance";
+@use "admin/components/DataTable/components/DataTableBulkActions/DataTableBulkActions";
+@use "admin/components/DataTable/components/DataTableFilters/DataTableFilters";
+@use "admin/components/DataTable/components/DataTablePagination/DataTablePagination";
+@use "admin/components/DataTable/components/DataTableSearch/DataTableSearch";
+@use "admin/components/ReportQuery/ReportQueryControls";
+@use "admin/components/ResizableReportSplit/ResizableReportSplit";
+@use "admin/components/SavedViews/SavedViews";
+@use "admin/components/StickyLayout/StickyLayout";
+@use "admin/features/Advanced/Advanced";
+@use "admin/features/Advanced/components/ResetSettingsSection";
+@use "admin/features/ContentSources/ContentSources";
+@use "admin/features/ContentSources/components/SourceDistributionChart";
+@use "admin/features/Events/Events";
+@use "admin/features/General/General";
+@use "admin/features/General/components/BufferStatusSection/BufferStatusSection";
+@use "admin/features/General/components/ChartsSection/ChartsSection";
+@use "admin/features/General/components/DashboardStatusSection";
+@use "admin/features/RealTime/RealTime";
+@use "admin/features/Reports/Reports";
+@use "admin/features/Settings/components/PrivacySection";
+@include ppla-styles-root;
+@include ppla-styles-pro-root;
+
+.ppla-main-layout {
+	background-color: $white;
+	border-radius: $radius-medium;
+	box-shadow: $elevation-x-small;
+	border: $border-width solid $gray-200;
+}
+
+.ppla-main-content {
+	display: flex;
+	flex-direction: column;
+	gap: $grid-unit-30;
+	padding: $grid-unit-20;
+
+	@include max-medium {
+		gap: $grid-unit-20;
+	}
+
+	@include max-small {
+		padding-inline: $grid-unit-10;
+	}
+}
+
+// Several component styles reset `outline`; keyboard users still need a
+// visible focus ring (WCAG 2.4.7) on every interactive element.
+#ppla-admin-root :is(button, a, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+	outline: 2px solid var(--ppla-theme-color-primary-text);
+	outline-offset: 2px;
+}
+
+// Segmented controls outline the whole group on any focus, including a mouse
+// click. Keep that ring for keyboard focus only, in the plugin colour.
+#ppla-admin-root .components-toggle-group-control:focus-within {
+	outline: none;
+}
+
+#ppla-admin-root .components-toggle-group-control:has(:focus-visible) {
+	outline: 2px solid var(--ppla-theme-color-primary-text);
+	outline-offset: 2px;
+}
+
+#ppla-admin-root .ppla-settings-card {
+	background-color: $white;
+	border-radius: $radius-medium;
+	box-shadow: $elevation-x-small;
+
+	margin-block-end: 0 !important;
+	
+	border: $border-width solid $gray-200;
+	position: relative;
+
+	animation: pplaSettingsCard 0.2s ease-out;
+	animation-fill-mode: forwards;
+
+	@keyframes pplaSettingsCard {
+
+		from { 
+			opacity: 0;
+			transform: translateY(calc($grid-unit-20 * -1)); 
+		}
+
+		to { 
+			opacity: 1;
+			transform: translateY(0); 
+		}
+	}
+
+	&-header {
+		position: relative;
+		min-height: 70px;
+		padding-inline: $grid-unit-20;
+		padding-block: $grid-unit-20;
+		
+		h2 {
+			margin: 0;
+			color: $gray-900;
+			white-space: nowrap;
+
+		    display: flex;
+    		align-items: center;
+			
+			@include heading-custom();
+		}
+
+		&-badge {
+			display: inline-block;
+			color: $white;
+			padding: $grid-unit-05 $grid-unit-10;
+			border-radius: $radius-medium;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			margin-inline-start: $grid-unit-15;
+			margin-block: -6px;
+			font-size: $font-size-x-small;
+			font-weight: $font-weight-medium;
+			line-height: $font-line-height-x-small;
+			background: var(--ppla-theme-gradient);
+			box-shadow: 0 2px 8px rgba(var(--ppla-theme-color-primary-rgb), 0.3);
+		}
+
+		.ppla-spinner {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+
+		@include max-medium {
+			min-height: 84px;
+			padding-inline: $grid-unit-20;
+		}
+
+		@include max-small {
+			padding-inline: $grid-unit-10;
+		}
+	}
+
+	&-body {
+		display: flex;
+		flex-direction: column;
+		gap: $grid-unit-20;
+
+		padding-inline: $grid-unit-20;
+		padding-block: $grid-unit-20;
+
+		@include max-small {
+			padding-inline: $grid-unit-10;
+		}
+	}
+
+	&-heading {
+		margin: 0;
+		color: $gray-900;
+
+		@include heading-medium;
+
+		&:has(+ .ppla-settings-card-description) {
+			margin-block-end: $grid-unit-05;
+		}
+	}
+
+	&-description {
+		margin: 0;
+		color: $gray-700;
+
+		@include body-small;
+	}
+
+	&-row {
+		display: flex;
+		gap: $grid-unit-20
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	.ppla-admin-app *,
+	.ppla-admin-app *::before,
+	.ppla-admin-app *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+#ppla-admin-root .ppla-report-table-section__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: $grid-unit-20;
+
+	@include max-small {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+}
+
+#ppla-admin-root .ppla-report-table-actions {
+	flex-wrap: wrap;
+}
+
+#ppla-admin-root .ppla-privacy-range-notice {
+	margin: 0;
+
+	.components-button {
+		margin-inline-start: $grid-unit-05;
+	}
+}
+
+#ppla-admin-root .ppla-measurement-state-notice {
+	margin-block: $grid-unit-15;
+
+	p {
+		margin-block: 0 $grid-unit-10;
+	}
+}
+
+#ppla-admin-root .ppla-privacy-range-notice__changes {
+	margin: $grid-unit-10 0;
+	padding-inline-start: $grid-unit-20;
+
+	li {
+		margin-block: $grid-unit-05;
+	}
+
+	time {
+		color: $gray-700;
+	}
+}
+
+
+@include shared.ppla-button-base {
+
+    @include shared.ppla-button-icon-modifiers;
+    @include shared.ppla-button-variant-link;
+    @include shared.ppla-button-variant-secondary;
+    @include shared.ppla-button-variant-tertiary;
+    @include shared.ppla-button-variant-primary;
+    @include shared.ppla-button-variant-pro;
+}
+
+@include shared.ppla-modal-base;
+@include shared.ppla-text-control;
+@include shared.ppla-textarea-control;
+@include shared.ppla-help;
+@include shared.ppla-admin-form-rhythm;
+@include shared.ppla-is-required;
+@include shared.ppla-has-error;
+@include shared.ppla-checkbox-control;
+@include shared.ppla-spinner;
+@include shared.ppla-token-field;
+@include shared.ppla-select-control;
+@include shared.ppla-toggle-group-control;
+
+/*
+ * Keep WordPress primitives visually native to the plugin. A few feature
+ * modules intentionally use core components directly, so this scoped layer
+ * gives them the same rhythm as the explicitly branded ppla-button controls.
+ */
+#ppla-admin-root .ppla-admin-app {
+	--ppla-control-height: 42px;
+	--ppla-control-radius: #{$radius-medium};
+	--ppla-control-border: #e0e0e0;
+	--ppla-control-focus: 0 0 0 3px rgba(var(--ppla-color-primary-rgb), 0.16);
+
+	.components-button:not(.ppla-button):not(.ppla-datatable__head-btn):not(.components-form-token-field__remove-token) {
+		min-height: var(--ppla-control-height);
+		padding: $grid-unit-10 $grid-unit-15;
+		border: 1px solid transparent;
+		border-radius: var(--ppla-control-radius);
+		font-size: $ppla-font-size-medium;
+		font-weight: $font-weight-medium;
+		line-height: 1.2;
+		transition:
+			background-color 180ms ease,
+			border-color 180ms ease,
+			box-shadow 180ms ease,
+			color 180ms ease,
+			transform 180ms ease,
+			opacity 180ms ease;
+
+		&:focus-visible {
+			outline: none;
+			box-shadow: var(--ppla-control-focus);
+		}
+
+		&[aria-expanded="true"],
+		&.is-pressed {
+			box-shadow: inset 0 0 0 1px var(--ppla-color-primary);
+		}
+
+		&:disabled,
+		&[aria-disabled="true"] {
+			opacity: 0.52;
+			box-shadow: none;
+		}
+
+		@media (hover: hover) {
+
+			&:hover:not(:disabled, [aria-disabled="true"], .is-pressed) {
+				transform: translateY(-1px);
+			}
+		}
+
+		// Same tokens as the branded .ppla-button, so core buttons used directly
+		// by feature modules keep the AA-contrast emerald instead of #10b981.
+		&.is-primary {
+			border-color: var(--ppla-color-primary-strong);
+			background: var(--ppla-color-primary-strong);
+			color: $white;
+			box-shadow: 0 2px 8px rgba(var(--ppla-color-primary-rgb), 0.25);
+
+			@media (hover: hover) {
+
+				&:hover:not(:disabled, [aria-disabled="true"]) {
+					border-color: var(--ppla-color-primary-strong-hover);
+					background: var(--ppla-color-primary-strong-hover);
+					box-shadow: 0 4px 12px rgba(var(--ppla-color-primary-dark-rgb), 0.35);
+				}
+			}
+		}
+
+		&.is-secondary {
+			border-color: var(--ppla-theme-color-primary-text);
+			background: $white;
+			color: var(--ppla-theme-color-primary-text);
+
+			@media (hover: hover) {
+
+				&:hover:not(:disabled, [aria-disabled="true"]) {
+					background: var(--ppla-color-primary-lighter);
+				}
+			}
+		}
+
+		&.is-tertiary {
+			border-color: var(--ppla-control-border);
+			background: $white;
+			color: $gray-800;
+
+			@media (hover: hover) {
+
+				&:hover:not(:disabled, [aria-disabled="true"]) {
+					border-color: $gray-500;
+					background: $gray-100;
+				}
+			}
+		}
+
+		&.is-link {
+			min-height: 32px;
+			padding: $grid-unit-05 $grid-unit-10;
+			border-color: transparent;
+			background: transparent;
+			color: var(--ppla-color-primary-dark);
+		}
+
+		&.is-destructive {
+
+			&.is-secondary,
+			&.is-tertiary {
+				border-color: $alert-red;
+				color: $alert-red;
+			}
+
+			&.is-link {
+				color: $alert-red;
+			}
+		}
+	}
+
+	.ppla-setting-group__actions {
+		display: flex;
+		align-items: center;
+		gap: $grid-unit-10;
+		margin-block-start: $grid-unit-10;
+	}
+
+	.components-input-control__backdrop {
+		border-color: var(--ppla-control-border);
+		border-radius: var(--ppla-control-radius);
+	}
+
+	.components-popover__content,
+	.components-dropdown-menu__menu {
+		border: 1px solid $gray-200;
+		border-radius: calc(#{$radius-medium} + 2px);
+		background: $white;
+		box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14), 0 3px 10px rgba(15, 23, 42, 0.06);
+		animation: ppla-popover-in 160ms ease-out both;
+
+		.components-menu-group {
+			padding: $grid-unit-05;
+		}
+
+		.components-menu-item__button {
+			min-height: 40px;
+			border-radius: $radius-small;
+			transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+
+			&:focus-visible {
+				outline: none;
+				box-shadow: inset 0 0 0 2px var(--ppla-color-primary);
+			}
+
+			&:hover:not(:disabled, [aria-disabled="true"]) {
+				background: var(--ppla-color-primary-lighter);
+				color: var(--ppla-color-primary-dark);
+				transform: translateX(2px);
+			}
+		}
+	}
+
+	.components-modal__frame.ppla-modal {
+		border: 1px solid $gray-200;
+		border-radius: calc(#{$radius-medium} + 4px);
+		box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+		overflow: hidden;
+		animation: ppla-modal-in 180ms ease-out both;
+
+		.components-modal__header {
+			background: linear-gradient(180deg, $white 0%, var(--ppla-color-primary-lighter) 180%);
+		}
+
+		.components-modal__content {
+			background: $white;
+		}
+	}
+}
+
+@keyframes ppla-popover-in {
+
+	from {
+		opacity: 0;
+		transform: translateY(-4px) scale(0.985);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes ppla-modal-in {
+
+	from {
+		opacity: 0;
+		transform: translateY(8px) scale(0.985);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}

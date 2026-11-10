@@ -1,0 +1,75 @@
+// --- assets/src/shared/components/AppHeader/AppHeader.scss ---
+@use "styles/variables" as *;
+
+.ppla-settings-header {
+	display: flex;
+	align-items: center;
+	gap: $grid-unit-20;
+	background-color: $white;
+	box-shadow: $elevation-x-small;
+	border-radius: $radius-medium;
+	border-top: 3px solid var(--ppla-color-primary);
+	padding: $grid-unit-15 $grid-unit-20;
+	margin-block-start: $grid-unit-20;
+	margin-block-end: $default-block-margin;
+
+	@include max-small {
+		gap: $grid-unit-10;
+		margin-block-end: $grid-unit-20;
+		position: relative;
+		flex-direction: column;
+	}
+
+	&-logo {
+		flex-shrink: 0;
+		width: 40px;
+		height: 40px;
+		border-radius: $radius-large;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		img {
+			height: auto;
+			width: 100%;
+			max-width: 100%;
+		}
+
+	}
+
+	h1 {
+		margin: 0 0 2px;
+		padding: 0;
+		color: $gray-900;
+		font-weight: $font-weight-bold;
+
+		@include heading-large();
+	}
+
+	p {
+		margin-block: 0;
+		color: $gray-700;
+
+		@include body-small();
+	}
+
+	&-badge {
+		color: $white;
+		padding: $grid-unit-10 $grid-unit-20;
+		border-radius: $radius-medium;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		margin-inline-start: auto;
+		font-size: $font-size-small;
+		font-weight: $font-weight-medium;
+		line-height: $font-line-height-x-small;
+		background: var(--ppla-theme-gradient);
+		box-shadow: 0 2px 8px rgba(var(--ppla-theme-color-primary-rgb), 0.3);
+
+		@include max-small {
+			position: absolute;
+			top: $grid-unit-10;
+			right: $grid-unit-10;
+		}
+	}
+}

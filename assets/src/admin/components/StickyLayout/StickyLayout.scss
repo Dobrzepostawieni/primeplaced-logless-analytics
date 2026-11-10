@@ -1,0 +1,659 @@
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+@keyframes pplaReportSectionFocus {
+
+	0% {
+		box-shadow: 0 0 0 0 color-mix(in srgb, var(--ppla-theme-color-primary) 34%, transparent);
+	}
+
+	100% {
+		box-shadow: 0 0 0 6px color-mix(in srgb, var(--ppla-theme-color-primary) 0%, transparent);
+	}
+}
+
+.ppla-report-section-focus {
+	position: relative;
+	border-color: var(--ppla-theme-color-primary) !important;
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--ppla-theme-color-primary) 18%, transparent) !important;
+	animation: pplaReportSectionFocus 3000ms ease-out forwards;
+}
+
+.ppla-sticky-layout-section {
+
+	@include helpers.ppla-scope {
+
+		&:not(.ppla-is-active) {
+
+			.ppla-settings-card-header {
+				animation: pplaFadeInTop 0.2s ease-out forwards;
+			}
+		}
+
+		&.ppla-is-active {
+
+			.ppla-settings-card-header {
+				opacity: 0;
+				pointer-events: none;
+			}
+		}
+
+		&.ppla-sticky-layout-section--masonry.ppla-is-active {
+
+			.ppla-settings-card-header {
+				opacity: 1;
+				pointer-events: auto;
+			}
+		}
+	}
+}
+
+.ppla-sticky-layout-section--focused {
+
+	@include helpers.ppla-scope {
+		border-color: var(--ppla-theme-color-primary) !important;
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--ppla-theme-color-primary) 18%, transparent) !important;
+		animation: pplaSettingsSectionFocus 5000ms ease-out both;
+
+		@media (prefers-reduced-motion: reduce) {
+			animation: none;
+		}
+	}
+}
+
+.ppla-sticky-layout-masonry {
+
+	@include helpers.ppla-scope {
+		display: grid;
+		grid-auto-flow: dense;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		align-items: stretch;
+		gap: $grid-unit-30;
+
+		.ppla-masonry-layout-item,
+		.ppla-sticky-layout-section {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			min-width: 0;
+		}
+
+		.ppla-masonry-layout-item {
+			position: relative;
+			gap: $grid-unit-10;
+			transition:
+				opacity 0.2s ease-in-out,
+				transform 0.2s ease-in-out;
+
+			> .ppla-settings-card {
+				flex: 1 1 auto;
+			}
+
+			&.is-customizing {
+				cursor: grab;
+			}
+
+			&.is-dragging {
+				opacity: 0.56;
+				transform: scale(0.985);
+			}
+		}
+
+		.ppla-sticky-layout-section {
+
+			> .components-card__body,
+			> .ppla-settings-card-body {
+				flex: 1 1 auto;
+			}
+		}
+
+		.ppla-masonry-standard {
+			grid-column: span 1;
+		}
+
+		.ppla-masonry-wide {
+			grid-column: span 2;
+		}
+
+		.ppla-masonry-full {
+			grid-column: 1 / -1;
+		}
+
+		&.is-customizing {
+			align-items: start;
+
+			.ppla-settings-card {
+				outline: 1px dashed color-mix(in srgb, var(--ppla-theme-color-primary) 34%, #dcdcde);
+				outline-offset: 3px;
+			}
+		}
+
+		@include max-wide {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+
+			.ppla-masonry-standard,
+			.ppla-masonry-wide {
+				grid-column: span 1;
+			}
+		}
+
+		@include max-medium {
+			grid-template-columns: 1fr;
+
+			.ppla-masonry-standard,
+			.ppla-masonry-wide,
+			.ppla-masonry-full {
+				grid-column: auto;
+			}
+		}
+	}
+}
+
+.ppla-sticky-layout-split {
+
+	@include helpers.ppla-scope {
+		display: grid;
+		grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+		align-items: start;
+		gap: $grid-unit-30;
+
+		&__nav {
+			position: sticky;
+			top: calc(32px + $grid-unit-20 + 70px + $grid-unit-20);
+			min-width: 0;
+		}
+
+		&__nav-list {
+			display: flex;
+			flex-direction: column;
+			gap: $grid-unit-05;
+		}
+
+		&__nav-group {
+			border-inline-start: $border-width solid $gray-200;
+		}
+
+		&__nav-group-toggle {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: $grid-unit-10;
+			width: 100%;
+			min-height: 40px;
+			padding: $grid-unit-10 $grid-unit-15;
+			border: 0;
+			background: transparent;
+			color: $gray-700;
+			font-size: $ppla-font-size-small;
+			font-weight: $font-weight-bold;
+			letter-spacing: 0.02em;
+			text-align: start;
+			cursor: pointer;
+
+			&:hover {
+				background: color-mix(in srgb, var(--ppla-theme-color-primary) 5%, $white);
+				color: $gray-900;
+			}
+
+			&:focus-visible {
+				outline: 2px solid var(--ppla-theme-color-primary);
+				outline-offset: -2px;
+			}
+		}
+
+		&__nav-group-items {
+			display: flex;
+			flex-direction: column;
+		}
+
+		&__nav-item {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: $grid-unit-10;
+			width: 100%;
+			min-height: 48px;
+			padding: $grid-unit-10 $grid-unit-15;
+			border: 0;
+			border-inline-start: 3px solid transparent;
+			background: transparent;
+			color: $gray-700;
+			font-size: $ppla-font-size-medium;
+			font-weight: $font-weight-medium;
+			text-align: start;
+			cursor: pointer;
+			transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+
+			svg {
+				flex: 0 0 auto;
+				opacity: 0.45;
+				transition: transform 180ms ease, opacity 180ms ease;
+			}
+
+			&:hover {
+				background: color-mix(in srgb, var(--ppla-theme-color-primary) 5%, $white);
+				color: $gray-900;
+			}
+
+			&:focus-visible {
+				outline: 2px solid var(--ppla-theme-color-primary);
+				outline-offset: -2px;
+			}
+
+			&.is-selected {
+				border-inline-start-color: var(--ppla-theme-color-primary);
+				background: color-mix(in srgb, var(--ppla-theme-color-primary) 9%, $white);
+				color: var(--ppla-theme-color-primary-dark);
+				font-weight: $font-weight-bold;
+
+				svg {
+					opacity: 1;
+					transform: translateX(2px);
+				}
+			}
+		}
+
+		&__content {
+			min-width: 0;
+
+			.ppla-sticky-layout-section--split {
+
+				.ppla-settings-card-header {
+					opacity: 1;
+					pointer-events: auto;
+				}
+			}
+		}
+
+		@include max-medium {
+			grid-template-columns: 1fr;
+			gap: $grid-unit-20;
+
+			&__nav {
+				position: static;
+			}
+
+			&__nav-list {
+				border: $border-width solid $gray-200;
+				border-radius: $radius-medium;
+				overflow: hidden;
+			}
+
+			&__nav-group {
+				border-inline-start: 0;
+				border-block-end: $border-width solid $gray-200;
+
+				&:last-child {
+					border-block-end: 0;
+				}
+			}
+
+			&__nav-item {
+				border-inline-start: 0;
+				border-block-end: $border-width solid $gray-200;
+
+				&:last-child {
+					border-block-end: 0;
+				}
+
+				&.is-selected {
+					border-inline-start: 0;
+					box-shadow: inset 3px 0 0 var(--ppla-theme-color-primary);
+				}
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+
+			&__nav-item,
+			&__nav-item svg {
+				transition: none;
+			}
+		}
+	}
+}
+
+.ppla-sticky-layout-grouped {
+
+	@include helpers.ppla-scope {
+		display: grid;
+		grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+		align-items: stretch;
+		gap: 0;
+
+		&__nav {
+			position: sticky;
+			top: calc(32px + $grid-unit-20 + 70px + $grid-unit-20);
+			display: flex;
+			flex-direction: column;
+			gap: $grid-unit-05;
+			border-inline-end: $border-width solid $gray-200;
+		}
+
+		&__nav-item {
+			width: 100%;
+			min-height: 48px;
+			padding: $grid-unit-10 $grid-unit-15;
+			border: 0;
+			border-inline-start: 3px solid transparent;
+			background: transparent;
+			color: $gray-700;
+			font-size: $ppla-font-size-medium;
+			font-weight: $font-weight-medium;
+			text-align: start;
+			cursor: pointer;
+
+			&:hover {
+				background: color-mix(in srgb, var(--ppla-theme-color-primary) 5%, $white);
+				color: $gray-900;
+			}
+
+			&:focus-visible {
+				outline: 2px solid var(--ppla-theme-color-primary);
+				outline-offset: -2px;
+			}
+
+			&.is-selected {
+				border-inline-start-color: var(--ppla-theme-color-primary);
+				background: color-mix(in srgb, var(--ppla-theme-color-primary) 9%, $white);
+				color: var(--ppla-theme-color-primary-dark);
+				font-weight: $font-weight-bold;
+			}
+		}
+
+		&__content {
+			min-width: 0;
+			padding: $grid-unit-20;
+		}
+
+		// At most two columns, and only when each card gets at least 380px;
+		// next to the group navigation on a 1024px screen that means one column.
+		&__sections {
+			display: grid;
+			grid-template-columns: repeat(
+				auto-fit,
+				minmax(min(100%, max(380px, calc((100% - #{$grid-unit-20}) / 2))), 1fr)
+			);
+			align-items: stretch;
+			gap: $grid-unit-20;
+
+			// Sections registered as wide (e.g. email reports, archives) need
+			// the whole row for their inner two-column forms.
+			> .ppla-masonry-wide,
+			> .ppla-masonry-full {
+				grid-column: 1 / -1;
+			}
+		}
+
+		.ppla-sticky-layout-section {
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+
+			> .ppla-settings-card {
+				display: flex;
+				flex: 1 1 auto;
+				flex-direction: column;
+
+				> .ppla-settings-card-body,
+				> .components-card__body {
+					flex: 1 1 auto;
+				}
+			}
+		}
+
+		@include max-medium {
+			grid-template-columns: 1fr;
+			gap: $grid-unit-20;
+
+			&__nav {
+				position: static;
+				border: $border-width solid $gray-200;
+				border-radius: $radius-medium;
+				overflow: hidden;
+			}
+
+			&__nav-item {
+				border-inline-start: 0;
+				border-block-end: $border-width solid $gray-200;
+
+				&:last-child {
+					border-block-end: 0;
+				}
+
+				&.is-selected {
+					box-shadow: inset 3px 0 0 var(--ppla-theme-color-primary);
+				}
+			}
+
+			&__sections {
+				grid-template-columns: 1fr;
+			}
+
+			&__content {
+				padding: 0;
+			}
+		}
+	}
+}
+
+.ppla-sticky-layout-grouped-card {
+
+	@include helpers.ppla-scope {
+		overflow: hidden;
+
+		&__header {
+			border-block-end: $border-width solid $gray-200;
+		}
+
+		&__body {
+			padding: 0;
+		}
+
+		.ppla-breadcrumb-icon {
+			margin-inline: $grid-unit-05;
+			vertical-align: middle;
+		}
+
+		.ppla-active-section {
+			vertical-align: middle;
+		}
+
+		@include max-medium {
+
+			&__body {
+				padding: $grid-unit-15;
+			}
+		}
+	}
+}
+
+@keyframes pplaSettingsSectionFocus {
+
+	0% {
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--ppla-theme-color-primary) 24%, transparent);
+	}
+
+	75% {
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--ppla-theme-color-primary) 24%, transparent);
+	}
+
+	100% {
+		box-shadow: 0 0 0 7px color-mix(in srgb, var(--ppla-theme-color-primary) 0%, transparent);
+	}
+}
+
+.ppla-settings-card.ppla-sticky-layout-top {
+
+	@include helpers.ppla-scope { 
+		position: sticky;
+		z-index: 20;
+		top: calc(32px + $grid-unit-20); 
+		min-height: 70px;
+		transition: all 0.2s ease-in-out;
+
+		@include max-small {
+			top: $grid-unit-05;
+		}
+
+		&.ppla-is-sticky {
+			box-shadow: $elevation-medium;
+		}
+
+		&.ppla-sticky-layout-top--masonry {
+			z-index: 12;
+			min-height: 58px;
+			background: rgba(255, 255, 255, 0.96);
+			backdrop-filter: blur(8px);
+
+			.ppla-settings-card-header {
+				padding-block: $grid-unit-15;
+			}
+
+			h2 {
+				font-size: 16px;
+			}
+
+			&.ppla-is-sticky {
+				box-shadow: $elevation-x-small;
+			}
+		}
+
+		.ppla-sticky-layout-actions {
+			display: flex;
+			align-items: center;
+			gap: $grid-unit-15;
+		}
+
+		.ppla-sticky-section-actions {
+			display: flex;
+			align-items: center;
+			gap: $grid-unit-15;
+			opacity: 0;
+			animation: pplaFadeInBottom 0.2s ease-out forwards;
+		}
+
+		.ppla-sticky-global-actions {
+			display: flex;
+			align-items: center;
+			gap: $grid-unit-15;
+		}
+
+		.ppla-sticky-layout-customize-actions {
+			display: flex;
+			align-items: center;
+			gap: $grid-unit-10;
+
+			@include max-medium {
+				flex-wrap: wrap;
+				justify-content: flex-end;
+			}
+		}
+
+		.ppla-breadcrumb-title {
+
+			@include max-medium {
+				opacity: 0;
+				transition: all 0.2s ease-in-out;
+				animation: pplaFadeInRight 0.2s ease-out forwards;
+			}
+		}
+
+		.ppla-breadcrumb-icon {
+			transition: all 0.2s ease-in-out;
+			animation: pplaFadeInRight 0.2s ease-out forwards;
+		}
+
+		.ppla-active-section {
+			display: flex;
+			align-items: center;
+			transition: all 0.2s ease-in-out;
+			opacity: 0;
+			transform: translateX(calc($grid-unit-15 * -1));
+			animation: pplaFadeInBottom 0.2s ease-out forwards;
+		}
+	}
+}
+
+.ppla-masonry-layout-controls {
+
+	@include helpers.ppla-scope {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: $grid-unit-15;
+		min-height: 40px;
+		padding: $grid-unit-10;
+		background: color-mix(in srgb, var(--ppla-theme-color-primary) 5%, #fff);
+		border: 1px solid color-mix(in srgb, var(--ppla-theme-color-primary) 26%, #dcdcde);
+		border-radius: $radius-medium;
+
+		&__move,
+		&__sizes {
+			display: flex;
+			align-items: center;
+			gap: $grid-unit-05;
+		}
+
+		&__drag.components-button {
+			cursor: grab;
+		}
+
+		.components-button.is-pressed {
+			color: var(--ppla-theme-color-primary-text);
+			background: $white;
+			border-color: var(--ppla-theme-color-primary);
+			box-shadow: inset 0 0 0 1px var(--ppla-theme-color-primary);
+		}
+
+		@include max-medium {
+			align-items: stretch;
+			flex-direction: column;
+
+			&__move,
+			&__sizes {
+				justify-content: space-between;
+			}
+		}
+	}
+}
+
+.ppla-settings-card.ppla-sticky-layout-bottom {
+
+	@include helpers.ppla-scope { 
+		position: sticky;
+		bottom: $grid-unit-20;
+		transition: all 0.2s ease-in-out;
+		z-index: 99;
+
+		&.ppla-is-sticky {
+			box-shadow: $elevation-medium;
+		}
+
+		@include max-small {
+			bottom: $grid-unit-05;
+		}
+	}
+}
+
+@keyframes pplaFadeInRight {
+
+	from { opacity: 0; transform: translateX(calc($grid-unit-15 * -1)); }
+
+	to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pplaFadeInBottom {
+
+	from { opacity: 0; transform: translateY(calc($grid-unit-15)); }
+
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pplaFadeInTop {
+
+	from { opacity: 0; transform: translateY(calc($grid-unit-15 * -1)); }
+
+	to { opacity: 1; transform: translateY(0); }
+}

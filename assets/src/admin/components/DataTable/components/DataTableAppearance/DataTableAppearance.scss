@@ -1,0 +1,145 @@
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+.ppla-datatable__appearance {
+
+	@include helpers.ppla-scope {
+
+		&-dropdown {
+			margin-left: auto;
+
+			
+			&-content {
+				padding: $grid-unit-20;
+				
+				display: flex;
+				flex-direction: column;
+				gap: $grid-unit-15;
+				
+				min-width: 300px;
+			}
+
+			.ppla-button {
+				width: 40px;
+				height: 40px;
+
+				@include max-medium {
+					width: 42px;
+					height: 42px;
+				}
+			}
+		}
+
+		&-title {
+			margin: 0;
+			color: $gray-900;
+
+			@include heading-large;
+		}
+
+		&-row {
+			display: grid;
+			gap: $grid-unit-10;
+
+			&--columns {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				align-items: end;
+			}
+
+			.components-base-control {
+				margin: 0;
+				min-width: 0;
+			}
+
+			.ppla-select-control,
+			.components-base-control__field {
+				display: flex;
+				flex-direction: column;
+				gap: $grid-unit-05;
+				margin: 0;
+				min-width: 0;
+			}
+
+			.ppla-select-control .ppla-select-control__label,
+			.components-input-control__label,
+			.components-base-control__label,
+			.components-menu-group__label {
+
+				@include helpers.ppla-input-label-base;
+
+				margin: 0;
+				margin-block-end: 0;
+			}
+
+			.ppla-select-control__trigger,
+			.components-toggle-group-control {
+				box-sizing: border-box;
+				height: 42px;
+				min-height: 42px;
+			}
+
+			.components-menu-group {
+				padding: 0;
+			}
+
+			.components-menu-item__button {
+				height: 40px;
+				padding-block:$grid-unit-05;
+				padding-inline: $grid-unit-10;
+
+				transition: 
+					background-color 0.2s ease-in-out, 
+					color 0.2s ease-in-out,
+					font-weight 0.2s ease-in-out;
+
+				&:hover:not(:disabled, [aria-disabled="true"], .is-pressed) {
+					color: var(--ppla-theme-color-primary-text);
+					background: var(--ppla-color-primary-lighter);
+				}	
+
+				@include max-medium {
+					height: 42px;
+				}
+			}
+		}
+
+		&-select {
+			--wp-components-color-foreground: var(--ppla-color-primary-lighter);
+
+			&::before {
+				background-color: var(--ppla-color-primary-lighter);
+				border-color: var(--ppla-color-primary);
+				border-radius: $radius-medium;
+			}
+
+			.components-toggle-group-control-option-base {
+				border-radius: calc(#{$radius-medium} - 2px);
+				color: $gray-700;
+				font-weight: $font-weight-medium;
+
+				border: none;
+				background: transparent;
+				transition: 
+					background-color 0.2s ease-in-out,
+					color 0.2s ease-in-out,
+					font-weight 0.2s ease-in-out,
+					box-shadow 0.2s ease-in-out;
+
+				min-width: 44px;
+			}
+
+			.components-toggle-group-control-option-base[aria-checked="true"] {
+				background-color: transparent;
+				
+				border: none;
+				color: var(--ppla-theme-color-primary-text);
+
+				&:hover:not([disabled]):not([aria-disabled="true"]) {
+					color: var(--ppla-theme-color-primary-text);
+					font-weight: $font-weight-bold;
+				}
+			}
+		}
+	}
+}

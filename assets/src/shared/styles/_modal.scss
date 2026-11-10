@@ -1,0 +1,118 @@
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+
+@mixin ppla-modal-base {
+
+	.ppla-modal {
+
+			border: $border-width solid $gray-200;
+			box-shadow: $elevation-large;
+
+			max-width: 50vw;
+
+			@include max-large {
+				height: fit-content;
+				max-width: 100%;
+				min-width: 100%;
+			}
+
+			.components-modal__header {
+				position: fixed;
+				border-bottom: $border-width solid $gray-200;
+				box-shadow: $elevation-x-small;
+				padding: $grid-unit-20 $grid-unit-30;
+				height: 65px;
+
+				h1 {
+					margin: 0;
+					color: $gray-900;
+
+					white-space: nowrap;
+
+					@include heading-custom();
+				}
+
+				button {
+					color: $gray-900;
+
+					&:hover:not(:disabled,[aria-disabled="true"]) {
+						color: var(--ppla-theme-color-primary-text);
+					}
+				}
+			}
+
+			.components-modal__content {
+				margin-top: 65px;
+				padding: $grid-unit-20 $grid-unit-30;
+				
+				&:has(.ppla-modal-footer) {
+					margin-bottom: 52px;
+
+					@include max-large {
+						margin-bottom: 59px;
+
+						
+					}
+				}
+
+				&:has(.components-toggle-control__help) {
+					margin-bottom: 72px;
+
+					@include max-large {
+						margin-bottom: 91px;
+					}
+				}
+			}
+
+			&-footer {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 52px;
+
+				min-height: fit-content;
+				
+				padding: $grid-unit-10 $grid-unit-30;
+				background: $white;
+				
+				border-top: $border-width solid $gray-200;
+				box-shadow: $elevation-x-small;
+
+				&-actions {
+					margin-left: auto;
+					display: flex;
+					gap: $grid-unit-20;
+				}
+
+				&:has(.components-toggle-control__help) {
+					height: 72px
+				}
+
+				@include max-large {
+					flex-direction: column;
+					align-items: flex-start;
+					height: 59px;
+
+					&:has(.components-toggle-control__help) {
+
+						height: 91px;
+					}
+				}
+			}
+
+			@content;
+		
+	}
+
+	.components-modal__screen-overlay:has(.ppla-modal) {
+
+		@include max-large {
+			align-items: center;
+		}
+	}
+}

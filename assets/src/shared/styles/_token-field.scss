@@ -1,0 +1,100 @@
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+@mixin ppla-token-field {
+
+	.components-form-token-field__suggestions-list {
+
+		@include helpers.ppla-scope {
+			position: absolute;
+			left: -1px;
+			z-index: 99998;
+			transform: translateY(12px);
+			background: $white;
+			border: inherit;
+			box-shadow: $elevation-medium;
+		}
+	}
+
+	.components-form-token-field__suggestion {
+
+		@include helpers.ppla-scope {
+			color: $gray-900;
+			transition: all 0.2s;
+
+			@include body-small;
+
+			&.is-selected {
+				color: var(--ppla-theme-color-primary-text);
+				background-color: var(--ppla-color-primary-lighter);
+			}
+		}
+	}
+
+	// The token sits in an intrinsically sized flex item, so the limit must be
+	// on that item: leave room for the 50px input, its 4px margin and the row
+	// gap (plus subpixel slack), keeping a single long token on one 42px row.
+	.components-form-token-field__input-container .components-flex-item:has(> .components-form-token-field__token) {
+
+		@include helpers.ppla-scope {
+			max-width: calc(100% - 64px);
+		}
+	}
+
+	.components-form-token-field__token {
+
+		@include helpers.ppla-scope {
+			max-width: 100%;
+			font-weight: $font-weight-medium;
+			color: $gray-900;
+			background-color: $gray-300;
+			border-radius: $radius-medium;
+
+			&-text {
+				align-items: center;
+				display: block;
+				min-width: 0;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				background: transparent;
+			}
+		}
+	}
+
+	.components-form-token-field__remove-token {
+
+		@include helpers.ppla-scope {
+			color: inherit;
+			background: transparent;
+			transition: all 0.2s;
+
+			&:hover {
+				color: $alert-red;
+			}
+		}
+	}
+
+	.has-error {
+
+		@include helpers.ppla-scope {
+
+			.ppla-form-token-field {
+				border-color: $alert-red;
+
+				.components-form-token-field__input-container {
+					border-color: $alert-red;
+				}
+			}
+		}
+	}
+
+	.ppla-settings-card:has(.components-form-token-field__suggestions-list) {
+
+		@include helpers.ppla-scope {
+			position: relative;
+			z-index: 100;
+		}
+	}
+}

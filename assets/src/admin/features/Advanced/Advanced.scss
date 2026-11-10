@@ -1,0 +1,44 @@
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+.ppla-advanced-diagnostics {
+
+    @include helpers.ppla-scope {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: $grid-unit-20;
+        background: $white; 
+        padding: $grid-unit-20;
+        border-radius: $radius-medium;
+        border: 1px solid $gray-200;
+
+        @include max-small {
+            grid-template-columns: 1fr;
+            gap: $grid-unit-15;
+        }
+
+        &-item {
+            display: flex;
+            flex-direction: column;
+            gap: $grid-unit-05;
+
+            &-label {
+
+                @include body-small;
+                color: $gray-500; 
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-weight: 600; 
+            }
+
+            &-value {
+                display: block;
+                color: $gray-900; 
+                font-size: 28px; 
+                font-weight: 700;
+                line-height: 1.2;
+                letter-spacing: -0.5px; 
+            }
+        }
+    }
+}

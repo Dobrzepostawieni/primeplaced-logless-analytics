@@ -1,0 +1,165 @@
+@use "@wordpress/base-styles/variables" as *;
+@use "@wordpress/base-styles/breakpoints" as *;
+
+$font-weight-bold: 699;
+
+$ppla-font-size-x-small: var(--ppla-font-size-x-small);
+$ppla-font-size-small: var(--ppla-font-size-small);
+$ppla-font-size-medium: var(--ppla-font-size-medium);
+$ppla-font-size-large: var(--ppla-font-size-large);
+$ppla-font-size-x-large: var(--ppla-font-size-x-large);
+$ppla-font-size-2x-large: var(--ppla-font-size-2x-large);
+$ppla-font-size-custom: var(--ppla-font-size-custom);
+
+$ppla-font-line-height-x-small: var(--ppla-line-height-x-small);
+$ppla-font-line-height-small: var(--ppla-line-height-small);
+$ppla-font-line-height-medium: var(--ppla-line-height-medium);
+$ppla-font-line-height-large: var(--ppla-line-height-large);
+$ppla-font-line-height-x-large: var(--ppla-line-height-x-large);
+$ppla-font-line-height-2x-large: var(--ppla-line-height-2x-large);
+$ppla-font-line-height-custom: var(--ppla-line-height-custom);
+
+@mixin _text-heading() {
+	font-family: $font-family-headings;
+	font-weight: $font-weight-medium;
+}
+
+@mixin _text-body() {
+	font-family: $font-family-body;
+	font-weight: $font-weight-regular;
+}
+
+@mixin heading-custom() {
+	font-size: $ppla-font-size-custom;
+	line-height: $ppla-font-line-height-custom;
+	font-family: $font-family-headings;
+	font-weight: $font-weight-bold;
+}
+
+@mixin heading-small() {
+
+	@include _text-heading();
+	font-size: $ppla-font-size-x-small;
+	line-height: $ppla-font-line-height-x-small;
+}
+
+@mixin heading-medium() {
+
+	@include _text-heading();
+	font-size: $ppla-font-size-medium;
+	line-height: $ppla-font-line-height-small;
+}
+
+@mixin heading-large() {
+
+	@include _text-heading();
+	font-size: $ppla-font-size-large;
+	line-height: $ppla-font-line-height-small;
+}
+
+@mixin heading-x-large() {
+
+	@include _text-heading();
+	font-size: $ppla-font-size-x-large;
+	line-height: $ppla-font-line-height-medium;
+}
+
+@mixin heading-2x-large() {
+
+	@include _text-heading();
+	font-size: $ppla-font-size-2x-large;
+	line-height: $ppla-font-line-height-2x-large;
+}
+
+@mixin body-small() {
+
+	@include _text-body();
+	font-size: $ppla-font-size-small;
+	line-height: $ppla-font-line-height-x-small;
+}
+
+@mixin body-medium() {
+
+	@include _text-body();
+	font-size: $ppla-font-size-medium;
+	line-height: $ppla-font-line-height-small;
+}
+
+@mixin body-large() {
+
+	@include _text-body();
+	font-size: $ppla-font-size-large;
+	line-height: $ppla-font-line-height-medium;
+}
+
+@mixin body-x-large() {
+
+	@include _text-body();
+	font-size: $ppla-font-size-x-large;
+	line-height: $ppla-font-line-height-x-large;
+}
+
+/**
+ * Breakpoint mixins.
+ *
+ * These are desktop-first `max-width` queries: `max-medium` applies at
+ * $break-medium and narrower. The `break-*` mixins in
+ * @wordpress/base-styles are mobile-first `min-width` queries, so the
+ * different prefix keeps the two from being confused.
+ */
+
+@mixin max-xhuge() {
+
+	@media (max-width: #{ ($break-xhuge) }) {
+		@content;
+	}
+}
+
+@mixin max-huge() {
+
+	@media (max-width: #{ ($break-huge) }) {
+		@content;
+	}
+}
+
+@mixin max-wide() {
+
+	@media (max-width: #{ ($break-wide) }) {
+		@content;
+	}
+}
+
+@mixin max-xlarge() {
+
+	@media (max-width: #{ ($break-xlarge) }) {
+		@content;
+	}
+}
+
+@mixin max-large() {
+
+	@media (max-width: #{ ($break-large) }) {
+		@content;
+	}
+}
+
+@mixin max-medium() {
+
+	@media (max-width: #{ ($break-medium) }) {
+		@content;
+	}
+}
+
+@mixin max-small() {
+
+	@media (max-width: #{ ($break-small) }) {
+		@content;
+	}
+}
+
+@mixin max-mobile() {
+
+	@media (max-width: #{ ($break-mobile) }) {
+		@content;
+	}
+}

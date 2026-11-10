@@ -1,0 +1,16 @@
+@use "styles/variables" as *;
+
+.ppla-reset-settings-section {
+
+	&__actions {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: $grid-unit-10;
+		margin-block-start: $grid-unit-15;
+	}
+
+	.components-notice {
+		margin-block-start: $grid-unit-20;
+	}
+}

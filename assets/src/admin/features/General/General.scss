@@ -1,0 +1,154 @@
+@use "styles/variables" as *;
+
+/**
+ * Feature: Failover Flowchart Component Styles.
+ * Maps data ingestion pipelines for REST, AJAX, and Beacon POST routes.
+ */
+.ppla-failover-flow {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: $grid-unit-20;
+	width: 100%;
+	min-width: 0;
+	padding-block: $grid-unit-10;
+	container-type: inline-size;
+
+	.ppla-failover-box {
+		flex: 1 1 140px;
+		min-width: 0;
+		overflow-wrap: anywhere;
+		background-color: $white;
+		border: $border-width solid $gray-200;
+		border-radius: $radius-medium;
+		padding: $grid-unit-20;
+		text-align: center;
+		transition: all 0.2s ease-in-out;
+
+		.ppla-failover-indicator {
+			width: $grid-unit-15;
+			height: $grid-unit-15;
+			background-color: $gray-300;
+			border: $border-width solid $gray-400;
+			border-radius: $radius-full;
+			margin: 0 auto $grid-unit-10 auto;
+		}
+
+		.ppla-failover-title {
+			display: block;
+			font-size: $ppla-font-size-medium;
+			color: $gray-700;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			font-weight: $font-weight-bold;
+		}
+
+		.ppla-failover-desc {
+			font-size: $ppla-font-size-small;
+			color: $ppla-text-muted;
+		}
+
+		&.is-checking {
+			background-color: $gray-100;
+			border-color: $gray-300;
+
+			.ppla-failover-indicator {
+				background-color: $gray-400;
+				border-color: $gray-500;
+			}
+		}
+
+		&.is-ready {
+			background-color: $light-gray-placeholder;
+
+			.ppla-failover-title {
+				color: $gray-900; }
+		}
+
+		&.is-active {
+			background-color: #f0fdf4;
+			border-color: $primary;
+
+			.ppla-failover-indicator {
+				background-color: $primary;
+				border-color: $primary-dark;
+				box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+			}
+
+			.ppla-failover-title {
+				color: $gray-900;
+			}
+		}
+
+		&.is-blocked {
+			background-color: #fef2f2; // soft red
+			border-color: #ef4444;
+
+			.ppla-failover-indicator {
+				background-color: #ef4444;
+				border-color: #dc2626;
+				box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+			}
+
+			.ppla-failover-title { color: #ef4444; }
+
+			.ppla-failover-desc { color: #991b1b; }
+		}
+
+		&.is-bypassed {
+			background-color: transparent;
+			border-style: dashed;
+			opacity: 0.5;
+
+			.ppla-failover-indicator {
+				background-color: transparent;
+				border-color: $gray-400;
+			}
+		}
+	}
+
+	.ppla-failover-arrow {
+		color: $gray-400;
+		font-size: $ppla-font-size-custom;
+		font-weight: $font-weight-bold;
+	}
+}
+
+// In a narrow column the three channels stack instead of overflowing the card.
+// The flow is its own container, so the rules target its children.
+@container (max-width: 520px) {
+
+	.ppla-failover-flow {
+
+		.ppla-failover-box {
+			flex-basis: 100%;
+		}
+
+		.ppla-failover-arrow {
+			flex-basis: 100%;
+			text-align: center;
+			transform: rotate(90deg);
+		}
+	}
+}
+
+/**
+ * Overview period selector: the label sits beside the options, not above them.
+ */
+/* stylelint-disable selector-class-pattern -- WordPress component class names. */
+.ppla-overview-range {
+
+	.components-base-control__field {
+		display: flex;
+		align-items: center;
+		gap: $grid-unit-15;
+		margin: 0;
+	}
+
+	.components-base-control__label,
+	.components-input-control__label {
+		margin: 0;
+		white-space: nowrap;
+	}
+}
+/* stylelint-enable selector-class-pattern */

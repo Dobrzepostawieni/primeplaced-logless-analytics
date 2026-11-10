@@ -1,0 +1,83 @@
+@use "styles/variables" as *;
+
+.ppla-stats {
+
+	&-wrapper {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: $grid-unit-20;
+		margin-block-end: $default-block-margin;
+
+		@include max-large {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		@include max-small {
+			gap: $grid-unit-10;
+		}
+	}
+
+	&-card {
+		display: flex;
+		flex-direction: column;
+		gap: $grid-unit-05;
+		min-width: 0;
+		padding: $grid-unit-20;
+		background-color: $white;
+		border: $border-width solid $gray-200;
+		border-left: 3px solid var(--ppla-theme-color-primary);
+		border-radius: $radius-medium;
+		box-shadow: $elevation-x-small;
+
+		&-title {
+			color: $gray-700;
+			text-transform: uppercase;
+			letter-spacing: 0.02em;
+
+			@include heading-small();
+		}
+
+		&-value {
+			color: $gray-900;
+			font-variant-numeric: tabular-nums;
+			font-weight: $font-weight-bold;
+
+			@include heading-2x-large();
+
+			@include max-small {
+
+				@include heading-x-large();
+			}
+		}
+
+		&-spinner {
+			width: 18px;
+			height: 18px;
+			margin: 0;
+			padding: 11px;
+		}
+
+		&-trend,
+		&-detail {
+			color: $gray-700;
+
+			@include body-medium();
+
+			@include max-small {
+
+				@include body-small();
+			}
+		}
+
+		&-trend {
+
+			&.is-positive {
+				color: $alert-ppla-green;
+			}
+
+			&.is-negative {
+				color: $alert-red;
+			}
+		}
+	}
+}

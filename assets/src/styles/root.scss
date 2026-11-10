@@ -1,0 +1,158 @@
+// --- assets/src/styles/_root.scss ---
+@use "sass:color";
+@use "sass:map";
+@use "./variables" as *;
+
+@mixin ppla-styles-root {
+
+	:root {
+		--ppla-color-primary: #{$primary};
+		--ppla-color-primary-rgb: #{get-rgb-values($primary)};
+
+		--ppla-color-primary-dark: #{$primary-dark};
+		--ppla-color-primary-dark-rgb: #{get-rgb-values($primary-dark)};
+
+		--ppla-color-primary-lighter: #{$primary-lighter};
+
+		// Brand green is too light for text (2.5:1 on white). Text and fills
+		// behind white text use a darker step that meets WCAG AA.
+		--ppla-color-primary-text: #{$primary-text};
+		--ppla-color-primary-strong: #{$primary-text};
+		--ppla-color-primary-strong-hover: #{color.mix(#000, $primary-text, 20%)};
+
+		--ppla-color-gray-rgb: #{get-rgb-values($gray-700)};
+
+		--ppla-gradient: linear-gradient(
+			135deg,
+			var(--ppla-color-primary) 0%,
+			var(--ppla-color-primary-dark) 100%
+		);
+
+		--ppla-theme-color-primary: var(--ppla-color-primary);
+		--ppla-theme-color-primary-rgb: var(--ppla-color-primary-dark-rgb);
+		--ppla-theme-color-primary-dark: var(--ppla-color-primary-dark);
+		--ppla-theme-color-primary-dark-rgb: var(--ppla-color-primary-dark-rgb);
+		--ppla-theme-color-primary-lighter: var(--ppla-color-primary-lighter);
+		--ppla-theme-color-primary-text: var(--ppla-color-primary-text);
+
+		--ppla-theme-gradient: var(--ppla-gradient);
+
+		--ppla-font-size-x-small: 11px;
+		--ppla-font-size-small: 12px;
+		--ppla-font-size-medium: 13px; 
+		--ppla-font-size-large: 15px;
+		--ppla-font-size-x-large: 20px;
+		--ppla-font-size-2x-large: 32px;
+		--ppla-font-size-custom: 18px;
+
+		--ppla-line-height-x-small: 16px;
+		--ppla-line-height-small: 20px;
+		--ppla-line-height-medium: 24px;
+		--ppla-line-height-large: 28px;
+		--ppla-line-height-x-large: 32px;
+		--ppla-line-height-2x-large: 40px;
+		--ppla-line-height-custom: 20px;
+
+		--ppla-grid-base: 8px;
+
+		--ppla-space-05: calc(var(--ppla-grid-base) * 0.5); /* 4px */
+		--ppla-space-10: calc(var(--ppla-grid-base) * 1);   /* 8px */
+		--ppla-space-15: calc(var(--ppla-grid-base) * 1.5); /* 12px */
+		--ppla-space-20: calc(var(--ppla-grid-base) * 2);   /* 16px */
+		--ppla-space-30: calc(var(--ppla-grid-base) * 3);   /* 24px */
+		--ppla-space-40: calc(var(--ppla-grid-base) * 4);   /* 32px */
+		--ppla-space-50: calc(var(--ppla-grid-base) * 5);   /* 40px */
+		--ppla-space-60: calc(var(--ppla-grid-base) * 6);   /* 48px */
+		--ppla-space-70: calc(var(--ppla-grid-base) * 7);   /* 56px */
+		--ppla-space-80: calc(var(--ppla-grid-base) * 8);   /* 64px */
+
+		--ppla-default-block-margin: calc(var(--ppla-grid-base) * 3.5);
+
+		@include max-medium {
+
+			--ppla-font-size-x-small: 12px;
+			--ppla-font-size-small: 14px;
+			--ppla-font-size-medium: 16px; 
+			--ppla-font-size-large: 18px;
+
+			--ppla-line-height-x-small: 18px;
+			--ppla-line-height-small: 22px;
+			--ppla-line-height-medium: 26px;
+			--ppla-line-height-large: 32px;
+		
+		}
+
+		@include max-small {
+			--ppla-font-size-x-small: 13px;
+			--ppla-font-size-small: 15px;
+
+			--ppla-line-height-x-small: 20px;
+			--ppla-line-height-small: 24px;
+		}
+	}
+
+	// WordPress components take their accent from the admin colour scheme
+	// (blue in "Modern"), so focus rings, menus and controls drifted from the
+	// emerald brand. Pin the accent inside every PPLA surface and popover.
+	/* stylelint-disable selector-class-pattern -- WordPress core class. */
+	:is(
+		#ppla-admin-root,
+		#ppla-widget-root,
+		#ppla-pricing-root,
+		.ppla-modal,
+		.components-popover__fallback-container
+	) {
+		--wp-admin-theme-color: #{$primary-text};
+		--wp-admin-theme-color--rgb: #{get-rgb-values($primary-text)};
+		--wp-admin-theme-color-darker-10: #{color.mix(#000, $primary-text, 10%)};
+		--wp-admin-theme-color-darker-10--rgb: #{get-rgb-values(color.mix(#000, $primary-text, 10%))};
+		--wp-admin-theme-color-darker-20: #{color.mix(#000, $primary-text, 20%)};
+		--wp-admin-theme-color-darker-20--rgb: #{get-rgb-values(color.mix(#000, $primary-text, 20%))};
+		--wp-components-color-accent: var(--wp-admin-theme-color);
+		--wp-components-color-accent-darker-10: var(--wp-admin-theme-color-darker-10);
+		--wp-components-color-accent-darker-20: var(--wp-admin-theme-color-darker-20);
+		--wp-components-color-accent-inverted: #fff;
+		// WordPress 7 components read Design System tokens before the admin
+		// theme colour, e.g. for the menu-item focus outline. ThemeProvider sets
+		// them through the DOM cascade only, which misses popovers portalled to
+		// <body>, so the brand tokens are pinned here for the same scopes.
+		/* stylelint-disable plugin-wpds/no-setting-wpds-custom-properties */
+		--wpds-color-stroke-focus: #{$primary-text};
+		--wpds-color-background-surface-brand: #{$primary-lighter};
+		--wpds-color-background-interactive-brand-strong: #{$primary-text};
+		--wpds-color-background-interactive-brand-strong-active: #{color.mix(#000, $primary-text, 20%)};
+		--wpds-color-background-interactive-brand-weak-active: #{color.mix(#fff, $primary-text, 88%)};
+		--wpds-color-background-thumb-brand: #{$primary-text};
+		--wpds-color-background-thumb-brand-active: #{$primary-text};
+		--wpds-color-foreground-interactive-brand: #{$primary-text};
+		--wpds-color-foreground-interactive-brand-active: #{color.mix(#000, $primary-text, 20%)};
+		--wpds-color-stroke-surface-brand: #{color.mix(#fff, $primary-text, 60%)};
+		--wpds-color-stroke-surface-brand-strong: #{$primary-text};
+		--wpds-color-stroke-interactive-brand: #{$primary-text};
+		--wpds-color-stroke-interactive-brand-active: #{color.mix(#000, $primary-text, 20%)};
+		/* stylelint-enable plugin-wpds/no-setting-wpds-custom-properties */
+	}
+	/* stylelint-enable selector-class-pattern */
+}
+
+@mixin ppla-styles-pro-root {
+
+	@each $tier, $colors in $theme-tiers {
+		.ppla-modal .is-#{$tier},
+		#ppla-admin-root .is-#{$tier},
+		#ppla-widget-root .is-#{$tier},
+		#ppla-pricing-root .is-#{$tier} {
+			--ppla-theme-color-primary: #{map.get($colors, "base")};
+			--ppla-theme-color-primary-rgb: #{map.get($colors, "rgb")};
+			--ppla-theme-color-primary-dark: #{map.get($colors, "dark")};
+			--ppla-theme-color-primary-dark-rgb: #{map.get($colors, "dark-rgb")};
+			--ppla-theme-color-primary-text: #{color.mix(#000, map.get($colors, "base"), 30%)};
+
+			--ppla-theme-gradient: linear-gradient(
+				135deg,
+				var(--ppla-theme-color-primary) 0%,
+				var(--ppla-theme-color-primary-dark) 100%
+			);
+		}
+	}
+}

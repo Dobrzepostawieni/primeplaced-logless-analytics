@@ -1,0 +1,91 @@
+@use "sass:color";
+@forward "@wordpress/base-styles/colors";
+@forward "@wordpress/base-styles/variables";
+// @forward "@wordpress/base-styles/mixins";
+@forward "@wordpress/base-styles/breakpoints";
+@forward "@wordpress/base-styles/animations";
+@forward "@wordpress/base-styles/default-custom-properties";
+@forward "./mixins";
+
+@function get-rgb-values($c) {
+
+	@return #{color.red($c)}, #{color.green($c)}, #{color.blue($c)};
+}
+
+@function generate-ppla-dark($base-color) {
+
+    @return color.adjust(
+        color.scale($base-color, $saturation: -36%, $lightness: -20%),
+        $hue: 41deg // Hue zostaje w adjust, bo kąty na kole obracamy o stałą wartość
+    );
+}
+
+$primary: #10b981;
+
+// Accessible text/fill variant of the brand green (5.5:1 on white).
+$primary-text: #047857;
+
+// Secondary text that stays above 4.5:1 on white and light gray panels.
+$ppla-text-muted: #646970;
+
+$gray-500: #b3b3b3;
+
+$primary-dark: color.mix(#000, $primary, 11.5%);
+$primary-lighter: color.mix(#fff, $primary, 94%);
+
+$pro-color-primary: #667eea;
+$pro-color-primary-dark: generate-ppla-dark($pro-color-primary);
+$pro-color-primary-rgb: get-rgb-values($pro-color-primary);
+$pro-color-primary-dark-rgb: get-rgb-values($pro-color-primary-dark);
+
+$business-color-primary:#7c45e2;
+$business-color-primary-dark: generate-ppla-dark($business-color-primary); 
+$business-color-primary-rgb: get-rgb-values($business-color-primary);
+$business-color-primary-dark-rgb: get-rgb-values($business-color-primary-dark);
+
+$agency-color-primary: #c55dcf;
+$agency-color-primary-dark: generate-ppla-dark($agency-color-primary); 
+$agency-color-primary-rgb: get-rgb-values($agency-color-primary);
+$agency-color-primary-dark-rgb: get-rgb-values($agency-color-primary-dark);
+
+$theme-tiers: (
+	"pro": (
+		"base": $pro-color-primary,
+		"rgb": $pro-color-primary-rgb,
+		"dark": $pro-color-primary-dark,
+		"dark-rgb": $pro-color-primary-dark-rgb,
+	),
+	"basic": (
+		"base": $pro-color-primary,
+		"rgb": $pro-color-primary-rgb,
+		"dark": $pro-color-primary-dark,
+		"dark-rgb": $pro-color-primary-dark-rgb,
+	),
+	"business": (
+		"base": $business-color-primary,
+		"rgb": $business-color-primary-rgb,
+		"dark": $business-color-primary-dark,
+		"dark-rgb": $business-color-primary-dark-rgb,
+	),
+	"agency": (
+		"base": $agency-color-primary,
+		"rgb": $agency-color-primary-rgb,
+		"dark": $agency-color-primary-dark,
+		"dark-rgb": $agency-color-primary-dark-rgb,
+	),
+);
+
+$alert-blue: #2271b1;
+$alert-ppla-green: #2E7D32;
+
+$grid-unit-05: var(--ppla-space-05); // 4px base
+$grid-unit-10: var(--ppla-space-10); // 8px base
+$grid-unit-15: var(--ppla-space-15); // 12px base
+$grid-unit-20: var(--ppla-space-20); // 16px base
+$grid-unit-30: var(--ppla-space-30); // 24px base
+$grid-unit-40: var(--ppla-space-40); // 32px base
+$grid-unit-50: var(--ppla-space-50); // 40px base
+$grid-unit-60: var(--ppla-space-60); // 48px base
+$grid-unit-70: var(--ppla-space-70); // 56px base
+$grid-unit-80: var(--ppla-space-80); // 64px base
+$default-block-margin: var(--ppla-default-block-margin); // 28px base
