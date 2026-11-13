@@ -27,12 +27,15 @@
 @use "admin/features/ContentSources/components/SourceDistributionChart";
 @use "admin/features/Events/Events";
 @use "admin/features/General/General";
+@use "admin/features/Help/HelpSection";
 @use "admin/features/General/components/BufferStatusSection/BufferStatusSection";
 @use "admin/features/General/components/ChartsSection/ChartsSection";
 @use "admin/features/General/components/DashboardStatusSection";
 @use "admin/features/RealTime/RealTime";
 @use "admin/features/Reports/Reports";
 @use "admin/features/Settings/components/PrivacySection";
+@use "admin/features/Upgrade/Upgrade";
+@use "shared/components/UpgradeHeader/UpgradeHeader";
 @include ppla-styles-root;
 @include ppla-styles-pro-root;
 

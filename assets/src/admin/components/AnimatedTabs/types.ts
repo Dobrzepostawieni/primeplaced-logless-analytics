@@ -11,6 +11,8 @@ export type TabKey =
 	| 'realtime'
 	| 'events'
 	| 'settings'
+	| 'help'
+	| 'upgrade'
 ;
 
 export interface TabDefinition {

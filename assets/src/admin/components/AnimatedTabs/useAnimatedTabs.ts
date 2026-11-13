@@ -16,6 +16,8 @@ const VALID_TABS: TabKey[] = [
 	'realtime',
 	'events',
 	'settings',
+	'help',
+	'upgrade',
 ];
 
 export const useAnimatedTabs = (tabs: TabDefinition[], isDirty: boolean) => {

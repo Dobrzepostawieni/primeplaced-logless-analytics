@@ -4,7 +4,7 @@ Tags: analytics, cookieless, privacy, gdpr, statistics
 Requires at least: 6.2
 Requires PHP: 7.4
 Tested up to: 7.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -38,7 +38,7 @@ The identity model never uses visitor cookies. Strict anonymous mode is enabled 
 
 An optional paid Pro version is available separately. The free plugin is fully functional on its own and does not contain locked features.
 
-Pro areas include geolocation analytics, referrer attribution, goals, scheduled reports, ecommerce analytics, form tracking, user journeys, page heatmaps, white-label reporting, WP-CLI/MainWP workflows, and branded PDF reports.
+Pro areas include geolocation analytics, site search reports, goals and conversions, Event Studio (no-code click, visibility, and scroll tracking), scroll depth tracking, referrer attribution, delegated analytics access for selected roles, form tracking, ecommerce analytics, user journeys, scheduled email and PDF reports, report archive, page heatmaps, white-label admin, branded PDF reports, full event log export, and WP-CLI/MainWP workflows.
 
 == Installation ==
 
@@ -141,6 +141,12 @@ Core data intentionally excludes:
 If Pro geolocation is enabled, country-level data may be derived from privacy-friendly edge headers or a local MaxMind database. This is designed to store country codes, not raw visitor IP addresses.
 
 == Changelog ==
+
+= 1.0.1 =
+
+* Added: Help tab with answers to common questions and links to support.
+* Added: Upgrade tab that shows what each paid plan includes.
+* Improved: the Pricing screen now matches the look of the rest of the plugin.
 
 = 1.0.0 =
 

@@ -922,3 +922,12 @@
 		transform: translateX(-50%) translateY(50%);
 	}
 }
+
+#ppla-pricing-root {
+	margin-block-start: $grid-unit-20;
+	margin-block-end: $default-block-margin;
+
+	.components-notice {
+		margin: 0 0 $grid-unit-20;
+	}
+}

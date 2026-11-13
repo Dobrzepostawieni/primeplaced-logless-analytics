@@ -1,0 +1,171 @@
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable selector-class-pattern */
+@use "styles/variables" as *;
+@use "styles/helpers" as helpers;
+
+.ppla-animated-tabs__button--upgrade {
+
+	@include helpers.ppla-scope {
+		z-index: 5;
+		height: 48px;
+		width: fit-content;
+
+		&.is-active {
+			z-index: 5;
+			color: $white;
+			transform: translateY(-2px);
+		}
+
+		&:hover:not(:disabled, [aria-disabled="true"]) {
+			color: $white;
+		}
+
+		@include max-medium {
+			height: 42px;
+			width: 42px;
+		}
+	}
+}
+
+.ppla-upgrade {
+
+	&-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		&-header {
+			display: flex;
+			flex-direction: column;
+
+			h4 {
+				margin-block-start: 0;
+				margin-block-end: $grid-unit-05;
+				color: $gray-900;
+
+				@include heading-large();
+			}
+
+			p {
+				margin-block: 0;
+				color: $gray-700;
+
+				@include body-medium();
+			}
+		}
+
+		&-actions {
+			display: flex;
+			align-items: center;
+			gap: $grid-unit-20;
+		}
+
+		@include max-large {
+			gap: $grid-unit-20;
+			align-items: flex-start;
+			flex-direction: column;
+		}
+	}
+}
+
+.ppla-pro-feature {
+
+	&-grid {
+
+		@include helpers.ppla-scope {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax($modal-min-width, 1fr));
+			gap: $grid-unit-20;
+			padding: $grid-unit-20;
+
+			@include max-small {
+				padding-inline: $grid-unit-10;
+			}
+		}
+	}
+
+	&-card {
+		position: relative;
+		background-color: $white;
+		border-radius: $radius-medium;
+		box-shadow: $elevation-x-small;
+		border: $border-width solid $gray-200;
+		padding: $grid-unit-20 $grid-unit-30;
+		transition:
+			border-color 0.2s ease-in-out,
+			box-shadow 0.2s ease-in-out,
+			transform 0.2s ease-in-out;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: $grid-unit-10;
+
+		@media (hover: hover) {
+
+			&:hover {
+				border-color: var(--ppla-theme-color-primary);
+				box-shadow: $elevation-medium;
+				transform: translateY(-2px);
+			}
+		}
+
+		&-icon {
+			width: $icon-size * 2;
+			height: $icon-size * 2;
+			border-radius: $radius-large;
+			background: var(--ppla-theme-gradient);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			svg {
+				width: $icon-size * 1.25;
+				height: $icon-size * 1.25;
+				fill: $white;
+			}
+		}
+
+		&-title {
+			margin-block: 0;
+			color: $gray-900;
+
+			@include heading-large();
+			font-weight: $font-weight-bold;
+		}
+
+		&-badge {
+			font-size: 11px;
+			line-height: 1;
+			font-weight: 600;
+			padding: 4px 6px;
+			border-radius: 4px;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			position: absolute;
+			top: $grid-unit-20;
+			right: $grid-unit-30;
+		}
+
+		&-description {
+			margin-block: 0;
+			color: $gray-700;
+
+			@include body-medium();
+		}
+
+		&.is-basic .ppla-pro-feature-card-badge {
+
+			@include helpers.ppla-badge-theme($pro-color-primary);
+		}
+
+		&.is-business .ppla-pro-feature-card-badge {
+
+			@include helpers.ppla-badge-theme($business-color-primary);
+		}
+
+		&.is-agency .ppla-pro-feature-card-badge {
+
+			@include helpers.ppla-badge-theme($agency-color-primary);
+		}
+	}
+}

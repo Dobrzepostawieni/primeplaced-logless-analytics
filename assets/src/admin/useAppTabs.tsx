@@ -6,8 +6,10 @@ import {
 	cog,
 	chartBar,
 	dashboard,
+	helpFilled,
 	postList,
 	seen,
+	starFilled,
 	tableOfContents,
 } from '@wordpress/icons';
 
@@ -15,9 +17,11 @@ import type { TabDefinition } from '@admin/components/AnimatedTabs';
 import { ContentSources } from '@features/ContentSources';
 import { Events } from '@features/Events';
 import { General } from '@features/General';
+import { HelpSection } from '@features/Help';
 import { RealTime } from '@features/RealTime';
 import { Reports } from '@features/Reports';
 import { Settings } from '@features/Settings';
+import { Upgrade } from '@features/Upgrade';
 
 const getBaseTabs = (): TabDefinition[] => [
 	{
@@ -98,16 +102,49 @@ const getBaseTabs = (): TabDefinition[] => [
 		),
 		components: [Settings],
 	},
+	{
+		name: 'help',
+		label: __('Help', 'primeplaced-logless-analytics'),
+		title: (
+			<>
+				<Icon icon={helpFilled} />
+				<span className="ppla-animated-tabs__button-text">
+					{__('Help', 'primeplaced-logless-analytics')}
+				</span>
+			</>
+		),
+		components: [HelpSection],
+	},
+	{
+		name: 'upgrade',
+		label: __('Upgrade to Pro', 'primeplaced-logless-analytics'),
+		title: (
+			<>
+				<Icon icon={starFilled} />
+				<span className="ppla-animated-tabs__button-text">
+					{__('Upgrade to Pro', 'primeplaced-logless-analytics')}
+				</span>
+			</>
+		),
+		components: [Upgrade],
+		className: 'ppla-animated-tabs__button--upgrade ppla-button is-pro',
+	},
 ];
 
 export const useAppTabs = (): TabDefinition[] => {
 	const { pplaData } = useAppState();
 
 	return useMemo(() => {
-		const tabs = getBaseTabs();
+		// Plans and checkout are for site managers; the top plan has nothing to upgrade to.
+		const hidden = new Set<string>();
+		if (!pplaData.can_manage_settings) {
+			hidden.add('settings');
+			hidden.add('upgrade');
+		}
+		if (pplaData.active_plan === 'agency') {
+			hidden.add('upgrade');
+		}
 
-		return pplaData.can_manage_settings
-			? tabs
-			: tabs.filter((tab) => tab.name !== 'settings');
-	}, [pplaData.can_manage_settings]);
+		return getBaseTabs().filter((tab) => !hidden.has(tab.name));
+	}, [pplaData.can_manage_settings, pplaData.active_plan]);
 };

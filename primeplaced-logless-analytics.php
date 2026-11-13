@@ -13,7 +13,7 @@
  * Description:       Privacy-first, cookieless WordPress analytics with local storage, data minimization, and explicit retention controls.
  * Requires at least: 6.2
  * Requires PHP:      7.4
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Dobrzepostawieni
  * Author URI:        https://dobrzepostawieni.pl
  * License:           GPL-3.0-or-later
@@ -26,7 +26,7 @@
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
-define( 'PPLA_VERSION', '1.0.0' );
+define( 'PPLA_VERSION', '1.0.1' );
 define( 'PPLA_TEXTDOMAIN', 'primeplaced-logless-analytics' );
 define( 'PPLA_NAME', 'PrimePlaced - Logless Analytics' );
 define( 'PPLA_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
