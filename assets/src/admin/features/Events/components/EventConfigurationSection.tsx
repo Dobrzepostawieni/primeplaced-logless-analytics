@@ -5,12 +5,13 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useRef, useEffect } from '@wordpress/element';
-import { Card, Panel, PanelBody } from '@wordpress/components';
+import { Card } from '@wordpress/components';
 import { applyFilters } from '@wordpress/hooks';
 import type { ReactNode } from 'react';
 import { useSettingsStateContext, useSettingsDispatch } from '@shared/contexts';
 import { PplaToggler } from '@shared/components/PplaToggler/PplaToggler';
 import { cn } from '@shared/utils/formatting';
+import { PplaPanel, PplaPanelBody } from '@shared/components/ComponentCompat/ComponentCompat';
 import type { StickySectionProps } from '@admin/components/StickyLayout';
 import { help } from '@wordpress/icons';
 import { useEventWorkspacePanel } from './EventWorkspacePanelStore';
@@ -37,8 +38,8 @@ export const EventConfigurationSection = ( { title, spyRef, isActive, className 
 
 	return (
 		<Card className={cn( 'ppla-settings-card', className, isActive && 'ppla-is-active' )} ref={cardRef}>
-			<Panel header={title} className="ppla-events-workspace-panel">
-				<PanelBody
+			<PplaPanel header={title} className="ppla-events-workspace-panel">
+				<PplaPanelBody
 					icon={help}
 					opened={isAutomatedPanelOpen}
 					buttonProps={{ onClick: () => workspacePanel?.selectPanel( 'automated' ) }}
@@ -64,7 +65,7 @@ export const EventConfigurationSection = ( { title, spyRef, isActive, className 
 						onChange={( val: boolean ) => void autosaveSettings( { track_outbound_links: val } )}
 					/>
 					{ /* Premium edits these rules in Event Studio instead. */ }
-					{ applyFilters( 'ppla.settings.Events.ShowCustomEventRules', true ) && <CustomEventsSection /> }
+					{ Boolean( applyFilters( 'ppla.settings.Events.ShowCustomEventRules', true ) ) && <CustomEventsSection /> }
 					<PplaToggler
 						className="ppla-events-workspace-panel__toggle"
 						isLoading={isLoading}
@@ -79,13 +80,13 @@ export const EventConfigurationSection = ( { title, spyRef, isActive, className 
 						null,
 						{ isLoading, isSaving, isPremium, autosaveSettings }
 					) as ReactNode }
-				</PanelBody>
+				</PplaPanelBody>
 				{ applyFilters(
 					'ppla.settings.Events.Options',
 					null,
 					{ isLoading, isSaving, isPremium, autosaveSettings }
 				) as ReactNode }
-			</Panel>
+			</PplaPanel>
 		</Card>
 	);
 };

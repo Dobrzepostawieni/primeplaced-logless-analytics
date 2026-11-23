@@ -1,3 +1,4 @@
+import type { IconType } from '@wordpress/components';
 import type { ReactNode } from 'react';
 
 export type FilterType = 'text' | 'select' | 'date' | 'duration';
@@ -83,7 +84,7 @@ export interface ColumnDef<T> {
 export interface ActionDef<T> {
 	id: string;
 	label: string;
-	icon?: unknown;
+	icon?: IconType;
 	isDestructive?: boolean;
 	supportsBulk?: boolean;
 	isPrimary?: boolean;
@@ -97,7 +98,7 @@ export interface ActionDef<T> {
 export interface BulkActionDef {
 	id: string;
 	label: string;
-	icon?: unknown;
+	icon?: IconType;
 	isDestructive?: boolean;
 	onClick: (
 		selectedRowIds: (string | number)[],
@@ -108,7 +109,7 @@ export interface BulkActionDef {
 export interface BoundBulkAction {
 	id: string;
 	label: string;
-	icon?: unknown;
+	icon?: IconType;
 	isDestructive?: boolean;
 	onClick: () => void;
 }

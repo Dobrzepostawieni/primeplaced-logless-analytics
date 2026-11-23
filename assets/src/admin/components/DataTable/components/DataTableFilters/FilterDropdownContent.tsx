@@ -164,7 +164,6 @@ export const FilterDropdownContent = ( {
 				{operatorSelect}
 				<TimePicker.TimeInput
 					label={__( 'Duration (Minutes : Seconds)', 'primeplaced-logless-analytics' )}
-					hideLabelFromVision
 					value={timeObjectValue}
 					onChange={( nextTime: string | { hours?: string | number; minutes?: string | number } | undefined | null ) => {
 						if ( nextTime && typeof nextTime === 'object' ) {

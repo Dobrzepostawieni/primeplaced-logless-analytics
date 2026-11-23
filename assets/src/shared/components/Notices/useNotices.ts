@@ -1,4 +1,6 @@
 import { useDispatch } from '@wordpress/data';
+// Declares the wp-notices script dependency, which registers the core/notices store.
+import '@wordpress/notices';
 import { sprintf } from '@wordpress/i18n';
 import { useCallback } from '@wordpress/element';
 import { noticeScheme } from './noticesScheme';

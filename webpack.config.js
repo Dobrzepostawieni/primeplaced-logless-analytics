@@ -116,6 +116,8 @@ const customMinimizers = (defaultConfig.optimization.minimizer || []).map(
 	}
 );
 
+const JSX_RUNTIME_REQUESTS = ['react/jsx-runtime', 'react/jsx-dev-runtime'];
+
 const pluginsWithBundledWpUi = defaultConfig.plugins.map((plugin) => {
 	if (plugin.constructor.name === 'MiniCssExtractPlugin') {
 		return new plugin.constructor({
@@ -135,7 +137,20 @@ const pluginsWithBundledWpUi = defaultConfig.plugins.map((plugin) => {
 				return false;
 			}
 
+			// WordPress 6.6+ ships the JSX runtime as `react-jsx-runtime`; an
+			// inlined React 18 copy would break once core moves to React 19.
+			if (JSX_RUNTIME_REQUESTS.includes(request)) {
+				return 'ReactJSXRuntime';
+			}
+
 			return plugin.options.requestToExternal?.(request);
+		},
+		requestToHandle: (request) => {
+			if (JSX_RUNTIME_REQUESTS.includes(request)) {
+				return 'react-jsx-runtime';
+			}
+
+			return plugin.options.requestToHandle?.(request);
 		},
 	});
 });

@@ -13,6 +13,7 @@ import {
 	CardHeader,
 	Button} from '@wordpress/components';
 import { download } from '@wordpress/icons';
+import type { ReactNode } from 'react';
 import { cn } from '@shared/utils/formatting';
 import type { StickySectionProps } from '@admin/components/StickyLayout';
 import { useApi } from '@shared/api/useApi';
@@ -91,7 +92,7 @@ export const DataManagementSection = ({
 		}
 	};
 
-	const proExportButtons = applyFilters('ppla.advanced.exportButtons', null);
+	const proExportButtons = applyFilters('ppla.advanced.exportButtons', null) as ReactNode;
 
 	const retentionOptions = [
 		{ label: __('7 days', 'primeplaced-logless-analytics'), value: '7' },

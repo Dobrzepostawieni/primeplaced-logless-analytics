@@ -1,6 +1,6 @@
 {
 	"name": "primeplaced-logless-analytics",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Privacy-first, cookieless WordPress analytics with local storage, data minimization, and explicit retention controls.",
 	"author": "Dobrzepostawieni <contact@dobrzepostawieni.pl>",
 	"license": "GPL-3.0-or-later",
@@ -24,6 +24,7 @@
 		"@wordpress/element": "^6.37.0",
 		"@wordpress/i18n": "^6.10.0",
 		"@wordpress/icons": "^11.5.0",
+		"@wordpress/notices": "^5.46.0",
 		"@wordpress/plugins": "^7.38.0",
 		"@wordpress/ui": "^0.24.0",
 		"chart.js": "^4.5.1",

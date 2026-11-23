@@ -1,32 +1,42 @@
-=== PrimePlaced - Logless Analytics ===
+=== PrimePlaced - Logless Analytics: Cookieless Stats ===
 Contributors: dobrzepostawieni
-Tags: analytics, cookieless, privacy, gdpr, statistics
-Requires at least: 6.2
+Tags: analytics, statistics, cookieless, gdpr, privacy-friendly
+Requires at least: 6.6
 Requires PHP: 7.4
 Tested up to: 7.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Privacy-first, cookieless analytics for WordPress. Local traffic insights without visitor cookies or raw IP storage.
+Cookieless, privacy-friendly stats: pageviews, traffic sources, devices and real-time visits, stored in your own WordPress database.
 
 == Description ==
 
-PrimePlaced - Logless Analytics gives WordPress site owners a practical analytics dashboard that runs inside WordPress and is designed around data minimization.
+PrimePlaced - Logless Analytics shows how people find and use your site without visitor cookies, without sending visitor data to a third-party analytics service, and without storing raw IP addresses.
 
-The plugin records pageviews and selected interaction events locally and keeps retention explicit. Strict mode stores no visitor or session identifier; optional session metrics use a daily rotating pseudonymous hash instead of a raw visitor identifier.
+Everything runs inside WordPress: tracking data goes to your own database, the dashboard lives in wp-admin, and you decide how long the data is kept.
+
+= Why Logless Analytics =
+
+* **No visitor cookies.** The tracker sets no cookies and stores nothing in the visitor's browser.
+* **Your data stays on your server.** Visitor analytics data is stored only in your WordPress database and is never sent to an outside analytics service.
+* **Private by default.** Strict anonymous mode, enabled by default, stores no visitor or session identifier. Optional session metrics use a pseudonymous hash that rotates daily, which prevents long-term visitor profiles.
+* **Lightweight.** The tracking script is about 4 KB (about 2 KB gzipped) and sends one small request to your own site per pageview. Hits are aggregated in the background.
+* **Works with page caching.** Tracking requests do not depend on a nonce, so pages served from a page cache or CDN are still counted.
+* **No limits in the free version.** No pageview quotas, no time limits, and no locked reports.
 
 = Core features =
 
 * Cookieless frontend tracking.
-* REST, admin-ajax, and Beacon POST fallback transports.
-* Local WordPress database storage.
-* Optional pseudonymous session hashes with daily salt rotation.
-* Top pages, traffic sources (including Google Ads and Meta Ads), devices, realtime activity, events, and 404 views.
-* Bot filtering, role exclusions, IP exclusions, and URL path exclusions.
-* Configurable script injection position and tracking transport mode.
+* Overview dashboard with pageviews, daily traffic, and comparison with the previous period.
+* Top pages, traffic sources (including Google Ads and Meta Ads campaigns), devices, 404 views, and events.
+* Real-time view of active visits, pageviews per minute, and the pages visitors are on right now.
+* Optional outbound link and file download tracking.
+* Bot filtering, role exclusions (administrators are excluded by default), IP exclusions, and URL path exclusions.
 * Configurable data retention (30 days to one year, or until you delete the data) and maintenance tools.
-* CSV export for core analytics snapshots.
+* CSV export for reports.
+* Local WordPress database storage with REST, admin-ajax, and Beacon POST fallback transports.
+* Configurable script position (head or footer) and tracking transport mode.
 
 = Privacy model =
 
@@ -51,7 +61,15 @@ Pro areas include geolocation analytics, site search reports, goals and conversi
 
 = Does the plugin use visitor cookies? =
 
-No. The core tracking flow is cookieless.
+No. The tracker sets no cookies and does not use localStorage, sessionStorage, or any other browser storage.
+
+= Do I need a cookie consent banner? =
+
+Logless Analytics sets no cookies, so it does not add cookies to your banner. Consent rules such as the EU ePrivacy Directive can also cover other ways of reading information from a visitor's device, and your site may use other tools that need consent. Whether your site needs a banner therefore depends on your whole setup and the laws that apply to you, so check with your legal adviser.
+
+= Is Logless Analytics GDPR compliant? =
+
+No plugin can make a website GDPR compliant on its own, because compliance also depends on how you run your site. Logless Analytics is designed to make privacy-friendly analytics easier: strict anonymous mode is on by default, raw IP addresses and User-Agent strings are not stored, data stays in your own database, and you choose how long it is kept. The Privacy & GDPR settings bring these options together.
 
 = Does it store raw IP addresses? =
 
@@ -65,13 +83,33 @@ No. User-Agent strings are processed in memory for device classification and pse
 
 Core analytics data is stored locally in custom WordPress database tables prefixed with `ppla_`.
 
+= Will it slow down my site? =
+
+The tracking script is about 4 KB (about 2 KB gzipped) and sends one small request to your own site per pageview, plus one per tracked click if you enable outbound link or file download tracking. It loads no third-party scripts. Incoming hits are queued and aggregated in the background, and you can move the script to the footer in the settings.
+
+= Does it work with caching plugins and CDNs? =
+
+Yes. Tracking happens in the visitor's browser and does not depend on a nonce, so pages served from a page cache or CDN are still counted.
+
+= Does it count bots? =
+
+Known bots and crawlers are filtered out by default, based on the User-Agent header. You can turn the filter off in the settings.
+
+= Can I use it alongside Google Analytics? =
+
+Yes. Logless Analytics works independently of other analytics tools. Expect the numbers to differ, because each tool counts visits and filters bots in its own way.
+
+= Is there a limit on traffic or reports? =
+
+No. The free version has no pageview quotas, no time limits, and no locked reports.
+
 = How does the buffer work? =
 
 Incoming hits are written to a local `ppla_buffer` database queue and are aggregated into analytics tables by WP-Cron. A manual flush tool is available in the admin screen.
 
 = Can I exclude administrators or editors? =
 
-Yes. The settings include role exclusions so logged-in user groups can be excluded from tracking.
+Yes. Administrators are excluded by default, and you can also exclude editors and authors so your own visits do not inflate the numbers.
 
 = Can I exclude IP addresses or URLs? =
 
@@ -91,11 +129,11 @@ Deleting the plugin from the Plugins screen removes all of its database tables, 
 
 == Screenshots ==
 
-1. Overview: hits and pageviews compared with the previous period, daily traffic, and device split.
-2. Top Pages: pageviews by page for the selected period.
-3. Top Traffic Sources: direct visits, referring sites, and Google Ads or Meta Ads campaigns.
-4. Real-Time: pageviews per minute and the pages visitors are on right now.
-5. Privacy settings: choose strict anonymous mode or daily rotating session hashes, and set data retention.
+1. Overview: pageviews compared with the previous period, the daily traffic trend, and the split between desktop, mobile, and tablet visitors.
+2. Top Pages: the pages and posts that get the most views in the last 7, 30, or 90 days, with CSV export.
+3. Traffic sources: direct visits, search engines, referring sites, and Google Ads and Meta Ads campaigns, recognized without storing campaign parameters.
+4. Real-Time: visits active right now, pageviews per minute over the last 20 minutes, and a live list of pages, sources, and devices.
+5. Privacy & GDPR settings: strict anonymous mode by default or daily rotating session hashes, and a data retention period you choose.
 
 == Development ==
 
@@ -141,6 +179,13 @@ Core data intentionally excludes:
 If Pro geolocation is enabled, country-level data may be derived from privacy-friendly edge headers or a local MaxMind database. This is designed to store country codes, not raw visitor IP addresses.
 
 == Changelog ==
+
+= 1.0.2 =
+
+* Added: Polish translation included with the plugin, so the dashboard and settings appear in Polish on Polish sites.
+* Changed: the plugin is now named "PrimePlaced - Logless Analytics: Cookieless Stats" on the Plugins screen.
+* Changed: the dashboard now uses the React JSX runtime that ships with WordPress, so it keeps working when WordPress moves to React 19. WordPress 6.6 or later is now required.
+* Fixed: the dashboard could fail to load with a blank screen when no other plugin loaded the WordPress notices script.
 
 = 1.0.1 =
 

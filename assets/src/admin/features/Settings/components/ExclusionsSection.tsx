@@ -5,7 +5,8 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useRef, useEffect } from '@wordpress/element';
-import { Button, Card, CardHeader, CardBody, FormTokenField } from '@wordpress/components';
+import { Button, Card, CardHeader, CardBody } from '@wordpress/components';
+import { PplaFormTokenField } from '@shared/components/ComponentCompat/ComponentCompat';
 import { useSettingsStateContext, useSettingsDispatch } from '@shared/contexts';
 import { PplaToggler } from '@shared/components/PplaToggler/PplaToggler';
 import { useExclusions } from '../useExclusions';
@@ -76,7 +77,7 @@ export const ExclusionsSection = ( { title, spyRef, isActive, className, headerA
 				/>
 
 				<div className="ppla-setting-group" style={{ marginTop: '16px' }}>
-					<FormTokenField
+					<PplaFormTokenField
 						label={__( 'Excluded IP addresses', 'primeplaced-logless-analytics' )}
 						value={excludedIps}
 						suggestions={[]}
@@ -106,7 +107,7 @@ export const ExclusionsSection = ( { title, spyRef, isActive, className, headerA
 				</div>
 
 				<div className="ppla-setting-group">
-					<FormTokenField
+					<PplaFormTokenField
 						label={__( 'Excluded URL patterns', 'primeplaced-logless-analytics' )}
 						value={excludedUrls}
 						suggestions={availableSuggestions}

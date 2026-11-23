@@ -1,4 +1,6 @@
 import { useSelect, useDispatch } from '@wordpress/data';
+// Declares the wp-notices script dependency, which registers the core/notices store.
+import '@wordpress/notices';
 import { SnackbarList } from '@wordpress/components';
 import { useEffect, createPortal } from '@wordpress/element';
 import type { Notice, NoticesProps } from './types';

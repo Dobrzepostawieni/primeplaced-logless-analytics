@@ -9,11 +9,11 @@
  * @license           GPL-3.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       PrimePlaced - Logless Analytics
+ * Plugin Name:       PrimePlaced - Logless Analytics: Cookieless Stats
  * Description:       Privacy-first, cookieless WordPress analytics with local storage, data minimization, and explicit retention controls.
- * Requires at least: 6.2
+ * Requires at least: 6.6
  * Requires PHP:      7.4
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Dobrzepostawieni
  * Author URI:        https://dobrzepostawieni.pl
  * License:           GPL-3.0-or-later
@@ -26,13 +26,13 @@
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
-define( 'PPLA_VERSION', '1.0.1' );
+define( 'PPLA_VERSION', '1.0.2' );
 define( 'PPLA_TEXTDOMAIN', 'primeplaced-logless-analytics' );
 define( 'PPLA_NAME', 'PrimePlaced - Logless Analytics' );
 define( 'PPLA_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
 define( 'PPLA_PLUGIN_ABSOLUTE', __FILE__ );
 define( 'PPLA_MIN_PHP_VERSION', '7.4' );
-define( 'PPLA_WP_VERSION', '6.2' );
+define( 'PPLA_WP_VERSION', '6.6' );
 define( 'PPLA_API_NAMESPACE', 'ppla/v1' );
 // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 $primeplaced_logless_analytics_libraries = (require PPLA_PLUGIN_ROOT . 'vendor/autoload.php');
